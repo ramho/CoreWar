@@ -5,6 +5,8 @@
 # include "../libft/libft.h"
 # include <stdlib.h>
 # include <unistd.h>
+# include <fcntl.h>
+#include <sys/stat.h>
 # include <stdio.h> // remove
 
 typedef struct s_asm t_asm;
@@ -23,6 +25,7 @@ int	main(int ac, char **av);
 ** valid_file.c
 */
 void valid_file(t_asm *champ, char *file_name);
+void open_file(char *file_name);
 
 /*
 ** parse_tokens.c

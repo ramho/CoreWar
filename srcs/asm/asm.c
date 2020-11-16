@@ -13,7 +13,6 @@ int	main(int ac, char **av)
 		printf("Usage: ./asm [-*****] <sourcefile.s>\n");
 		return (-1);
 	}
-
 	if(!(champ = ft_memalloc(sizeof(t_asm))))
 		return (-1);
 	valid_file(champ, av[ac - 1]);

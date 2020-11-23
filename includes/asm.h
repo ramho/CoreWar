@@ -6,6 +6,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+#include <sys/stat.h>
 # include <stdio.h> // remove
 
 typedef struct s_asm t_asm;

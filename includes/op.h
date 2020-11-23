@@ -3,10 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   op.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
 /*   By: zaz <zaz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
 /*   Updated: 2020/11/23 17:17:10 by rhoorntj         ###   ########.fr       */
+=======
+/*   By: zaz <zaz@student.s19.be>                   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
+/*   Updated: 2020/11/13 17:56:17 by Ramata           ###   ########.fr       */
+>>>>>>> 65ffe216677dd3bc5d4765fb578eaf77d6b4f35e
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +39,7 @@
 #define CHAMP_MAX_SIZE			(MEM_SIZE / 6)
 
 #define COMMENT_CHAR			'#'
+#define ALT_COMMENT_CHAR  ';' // ajoute par RH
 #define LABEL_CHAR				':'
 #define DIRECT_CHAR				'%'
 #define SEPARATOR_CHAR			','

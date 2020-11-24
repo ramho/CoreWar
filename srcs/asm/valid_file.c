@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   valid_file.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/24 12:30:57 by rhoorntj          #+#    #+#             */
+/*   Updated: 2020/11/24 12:56:35 by rhoorntj         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/asm.h"
 
 // if no file " Can't read source file %s"
@@ -10,11 +22,10 @@ int valid_file(t_asm *champ, char *file_name)
 	if (file_name[len - 2] == '.' && file_name[len - 1] == 's')
 	{
 		if (!(champ->file_name = ft_strsub(file_name, 0, len - 2)))
-			return (0);
+			malloc_error(champ, "valid_file.c");
 		return (1);
 	}
-	ft_printf("Can't read source file %s\n", file_name);
-	free(champ);
+	file_error(champ, file_name, 1);
 	return (0);
 }
 

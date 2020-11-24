@@ -10,12 +10,29 @@
 # include <stdio.h> // remove
 
 typedef struct s_asm t_asm;
+typedef struct s_token t_token;
+typedef struct s_param t_param;
 
 struct	s_asm
 {
 	char * file_name;
 	struct header_s *header;
 };
+
+struct s_token
+{
+	int pos;
+	char *label;
+
+};
+
+struct s_param
+{
+		int type;
+		int size;
+		int hex;
+};
+
 
 /*
 ** asm.c
@@ -38,7 +55,9 @@ void get_name_comment(char *line, t_asm *champ);
 /*
 ** free_error.c
 */
-
+void invalid_header(t_asm *champ, int error);
+void file_error(t_asm *champ, char *file_name, int error);
+void malloc_error(t_asm *champ, char *file);
 /*
 **
 */

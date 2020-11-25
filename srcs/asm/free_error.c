@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_error.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rhoorntj <rhoorntj@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 12:30:41 by rhoorntj          #+#    #+#             */
-/*   Updated: 2020/11/24 12:59:33 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2020/11/25 18:06:42 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,12 @@ void invalid_header(t_asm *champ, int error)
 		ft_printf("Champion comment too long (Max length 2048)\n");
 		//free tab and line in champ
 	}
+	// if (error = 3)
+	// {
+	// 	ft_printf("Syntax error at token [TOKEN][%03d:%03d] INSTRUCTION \"%s\"\n",
+	// 	 	row, len2 + (i + 1), str + i);
+	// 		//free tab and line in champ
+	// }
 	exit (-1);
 }
 

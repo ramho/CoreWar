@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rhoorntj <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: rhoorntj <rhoorntj@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/24 14:36:19 by rhoorntj          #+#    #+#              #
-#    Updated: 2020/11/24 16:22:34 by rhoorntj         ###   ########.fr        #
+#    Updated: 2020/11/25 18:13:20 by rhoorntj         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= asm
 CFLAGS	= #-Wall -Wextra -Werror
 
-SRC		= asm.c free_error.c parse_tokens.c valid_file.c
+SRC		= asm.c free_error.c parse_tokens.c valid_file.c parse_header.c
 OBJ		= $(SRC:.c=.o)
 LIB		= -L../../libft -lft
 

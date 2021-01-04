@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rhoorntj <rhoorntj@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 12:30:34 by rhoorntj          #+#    #+#             */
-/*   Updated: 2020/11/24 12:48:41 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2020/12/17 15:36:30 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,15 @@ t_asm *check_arg(int ac, t_asm *champ)
 int	main(int ac, char **av)
 {
 	t_asm *champ;
-	char *line;
-	int fd;
+	// char *line;
+	// int fd;
 
+ champ = NULL;
 	if (!(champ = check_arg(ac, champ)))
 		return (-1);
 	if (valid_file(champ,  av[ac - 1]))
 		get_file(av[ac - 1], champ);
+	// printf("name is [%s][%p]\n", champ->header->prog_name,champ->header->prog_name);
+	// printf("comment is [%s][%p]\n", champ->header->comment, champ->header->comment);
 	return (0);
 }

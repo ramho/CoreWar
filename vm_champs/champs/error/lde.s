@@ -1,4 +1,5 @@
 .name	"LDE LDE LDE"
+.comment                 	 	 	 	 	
 	ld %0,r6
 	sti r1,%:suitb,%1
 	sti r1,%:suitb,%6
@@ -25,8 +26,8 @@ toto:	st r15,-480
 	st r13,-484
 	st r14,-485
 	zjmp %-510
-	
-	
+
+
 decal2: live %1
 	fork %:suite
 	live %1
@@ -44,7 +45,7 @@ decal2: live %1
 	ld %201200643,r8
 	ld %1879899667,r13
 	ld %167641600,r14
-	
+
 	fork %:separ2
 	live %4
 	ld %134443011,r3
@@ -66,14 +67,14 @@ separ2:	live %3
 
 	xor r2,r2,r2
 	zjmp %:toto
-	
+
 padec2:	live %1
 	fork %:suite
 	live %1
 	ld %0,r2
 	zjmp %:decal
 
-	
+
 suite:	live %1
 	fork %:hop
 	live %1
@@ -105,7 +106,7 @@ middle:	live %1
 	live %1
 	zjmp %:middle
 
-	
+
 decal:	live %1
 	fork %:fuite
 	live %1
@@ -123,7 +124,7 @@ decal:	live %1
 	ld %184678915,r8
 	ld %1879835129,r13
 	ld %151119872,r14
-	
+
 	fork %:sepa
 	live %4
 	ld %134443011,r3
@@ -149,7 +150,7 @@ sepa:	live %3
 	live %4
 	live %4
 	live %4
-	
+
 tot:	st r15,488
 	st r4,487
 	st r7,486
@@ -157,8 +158,8 @@ tot:	st r15,488
 	st r13,484
 	st r14,483
 	zjmp %458
-	
-	
+
+
 fuite:	live %1
 	fork %:separe
 	live %4

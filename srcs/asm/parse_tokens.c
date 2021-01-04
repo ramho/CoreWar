@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhoorntj <rhoorntj@student.s19.be>         +#+  +:+       +#+        */
+/*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 12:30:49 by rhoorntj          #+#    #+#             */
-/*   Updated: 2020/12/17 18:14:56 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/04 16:20:54 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,59 +35,78 @@ void get_file(char *file, t_asm *champ)
 	}
 	while ((get_next_line(fd, &line) > 0))
 	{
+		// printf(" 1 line %d is [%s][%p]\n", row, line, line);
 		if ((buf = ft_strchr(line, '.')))
 			get_name_comment(buf, champ, row, ft_strlen(line));
 		else
+		{
+			// printf(" 2 line %d is [%s]\n", row, line);
 			get_opcode(line, champ, row);
+		}
+		// printf(" 3 line %d is [%s]\n", row, line);
 		free(line);
+		// printf("line freed of GNL in get_file\n\n");
 		row++;
 	}
+	// printf("leaving get file \n");
 }
 
 void get_opcode(char *line, t_asm *champ, int row)
 {
 	int i;
+	int flag;
 	int label_flag;
-	 char *tmp = malloc(sizeof(char) * 5);
+	char *ret;
+	int j;
 
-	printf("line[%d] in opcode is [%s]\n", row, line);
+	 // char *tmp = malloc(sizeof(char) * 5);
+
+	printf("IN OPCODE line[%d] in opcode is [%s]\n", row, line);
 	i = 0;
 	label_flag = 0;
 	while (ft_isspace(line[i]))
 		i++;
-	while(line && line[i] != '\0')
+	// printf("line after whitespace [%s]\n", line + i);
+	while(line && line[i] != '\0' && line[i] != '\n')
 	{
-		printf("\ti:[%d] - [%c] ",i, line[i]);
+		flag = i;
 		while (ft_strchr(LABEL_CHARS, line[i]))
 		{
-			tmp[i] = line[i];
 			i++;
 		}
-		printf("tmp [%s] i=[%c]\n", tmp, line[i]);
-		printf("op [%s]\n", g_op[1].name);
-		// if (tmp == )
-		// {
-		// 	free(tmp);
-			// parse_op(line);
-		// }
-		if (line[i] == LABEL_CHAR && label_flag == 0)
-			{
-					i = parse_label(line, i, row);
-					label_flag = 1;
+		ret = ft_strsub(line, flag, i - flag);
+		// printf("RET is [%s] line[i] = [%c]\n", ret, line[i]);
+		if (line[i] == LABEL_CHAR)
+		{
+			i = parse_label(line, i, row);
+			free(ret);
+
+
+		}
+		else if (line[i] == ' ')// find occurence of *str in a table //check id no :
+		 {
+			 j = 0;
+			 while ( j < 16)
+			 {
+				 if (ft_strcmp(ret, g_op[j].name) == 0)
+			 	{
+					if (parse_op(line + flag, i - flag, j))
+						return ;
+		 		}
+				j++;
 			}
-			// else
-			// {
-			// 	printf("error\n");
-			// }
+		}
 		i++;
+		// printf("END i [%d] line[i] [%c]\n", i, line[i]);
 
 	}
-	printf("\n");
+	// printf("OUT Of GET OPCODE\n\n");
 	// if
 }
 
 int parse_label(char *line, int i, int row)
 {
+	printf("\tin parse_label [%s]\n", line);
 	char *label_name;
 
 	label_name = malloc(sizeof(char*) * i);
@@ -97,16 +116,32 @@ int parse_label(char *line, int i, int row)
 	i += 1;
 	while (ft_isspace(line[i]))
 		i++;
-	printf("\t2- i[%d]- c:[%c]\n", i,line[i]);
-	return (i);
+	// printf("\t\t PARSE_LABEL i[%d]- c:[%c]\n", i,line[i]);
+	return (i - 1); // to cancel out the i++ in get_opcode
 }
 
-void parse_op(char *line)
+int parse_op(char *line, int i, int op)
 {
-	printf("in parse op [%s]\n", line);
-}
+	char **tab;
 
-void parse_param()
-{
-
+	printf("\tin parse op [%s], [%s]\n", line, line + i);
+	tab = ft_strsplit(line + i, SEPARATOR_CHAR);
+	int j = 0;
+	while (tab[j] != NULL)
+	{
+		printf("tab[%d] -->[%s]\n", j, tab[j]);
+		j++;
+	}
+	printf("j [%d] VS op [%d]\n", j, g_op[op].args_num);
+	if (j != g_op[op].args_num)
+	{
+		printf("ERROR\n");
+		exit(0);
+	}
+	return (1);
 }
+//
+// void parse_param()
+// {
+//
+// }

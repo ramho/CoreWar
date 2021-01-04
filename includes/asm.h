@@ -52,6 +52,7 @@ void get_file(char *file, t_asm *champ);
 void get_opcode(char *line, t_asm *champ, int row);
 int parse_label(char *line, int i, int row);
 int parse_op(char *line, int i, int op);
+void parse_param(char **tab);
 
 /*
 ** free_error.c

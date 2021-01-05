@@ -15,14 +15,19 @@ typedef struct s_param t_param;
 
 struct	s_asm
 {
+	int pos;
 	char * file_name;
+	char **file;
 	struct header_s *header;
 };
 
 struct s_token
 {
 	int pos;
+	int size_param;
+	int8_t	encoded_byte; // size of 1 byte
 	char *label;
+	// struct s_op ;//opcode from global variable
 
 };
 
@@ -52,7 +57,9 @@ void get_file(char *file, t_asm *champ);
 void get_opcode(char *line, t_asm *champ, int row);
 int parse_label(char *line, int i, int row);
 int parse_op(char *line, int i, int op);
-void parse_param(char **tab);
+// void parse_param(char **tab);
+void parse_param(int op, char **tab);
+int check_param(char *param);
 
 /*
 ** free_error.c
@@ -100,7 +107,7 @@ typedef struct	s_op
 	char		*name;
 	uint8_t		code;
 	uint8_t		args_num;
-	int			args_types_code;
+	int			args_types_code; //
 	uint8_t		args_types[3];
 	uint8_t		t_dir_size;
 }				t_op;

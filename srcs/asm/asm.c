@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhoorntj <rhoorntj@student.s19.be>         +#+  +:+       +#+        */
+/*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 12:30:34 by rhoorntj          #+#    #+#             */
-/*   Updated: 2020/12/17 15:36:30 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/05 15:42:18 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,11 @@
 	}
 }*/
 
-
+void init_asm(t_asm *champ)
+{
+	champ->pos = 0;
+	champ->file_name = NULL;
+}
 
 t_asm *check_arg(int ac, t_asm *champ)
 {
@@ -48,9 +52,10 @@ int	main(int ac, char **av)
 	// char *line;
 	// int fd;
 
- champ = NULL;
+ 	champ = NULL;
 	if (!(champ = check_arg(ac, champ)))
 		return (-1);
+	init_asm(champ);
 	if (valid_file(champ,  av[ac - 1]))
 		get_file(av[ac - 1], champ);
 	// printf("name is [%s][%p]\n", champ->header->prog_name,champ->header->prog_name);

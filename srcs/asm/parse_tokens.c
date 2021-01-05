@@ -6,7 +6,7 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 12:30:49 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/04 17:03:35 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/05 17:47:19 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,10 @@ void get_opcode(char *line, t_asm *champ, int row)
 		while (ft_strchr(LABEL_CHARS, line[i]))
 			i++;
 		ret = ft_strsub(line, flag, i - flag);
+		if (line[i] == '#' || line[i] == ';')
+		{
+			return;
+		}
 		if (line[i] == LABEL_CHAR)
 		{
 			i = parse_label(line, i, row);
@@ -86,7 +90,7 @@ void get_opcode(char *line, t_asm *champ, int row)
 
 int parse_label(char *line, int i, int row)
 {
-	printf("\tin parse_label [%s]\n", line);
+	printf(" in PARSE_LABEL [%s]\n", line);
 	char *label_name;
 
 	label_name = malloc(sizeof(char*) * i);
@@ -99,6 +103,7 @@ int parse_label(char *line, int i, int row)
 
 int parse_op(char *line, int i, int op)
 {
+	printf(" in PARSE_OP\n");
 	int j;
 	char **tab;
 
@@ -113,11 +118,54 @@ int parse_op(char *line, int i, int op)
 		printf("ERROR\n");
 		exit(0);
 	}
-	parse_param(tab);
+	parse_param(op, tab);
 	return (1);
 }
 
-void parse_param(char **tab)
+void parse_param(int op, char **tab)
 {
+	printf("  in PARSE_PARAM op [%s]\n", g_op[op].name);
+	int i;
+	int param;
 
+	// printf(" DIR %s\n", ft_itoa_base(2, 2, 'm'));
+
+	i = 0;
+	while (i < g_op[op].args_num)
+	{
+		param = check_param(tab[i]);
+		if (g_op[op].args_types[i] & param)
+		{
+			printf("param [%d][%d] is OK  ", i, param);
+		}
+		else
+		{
+			printf("ERROR - param[ %d - %s ][%d] doesn't match\n", i, tab[i],param);
+			exit(0);
+		}
+		i++;
+		printf("\n");
+	}
+}
+
+int check_param(char *param)// better to use index or move pointer directly ???
+{
+	int i;
+
+	i = 0;
+	while(ft_isspace(param[i]))
+		i++;
+	if(param[i] == 'r')
+	{
+		return(T_REG);
+	}
+	else if (param[i] == '%')
+	{
+		return(T_DIR);
+	}
+	else if (ft_isdigit(param[i]))
+	{
+		return (T_IND);
+	}
+	return(1);
 }

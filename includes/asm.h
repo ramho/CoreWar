@@ -15,7 +15,10 @@ typedef struct s_param t_param;
 
 struct	s_asm
 {
+	int i;
+	int row;
 	int pos;
+	char *line;
 	char * file_name;
 	char **file;
 	struct header_s *header;
@@ -27,6 +30,7 @@ struct s_token
 	int size_param;
 	int8_t	encoded_byte; // size of 1 byte
 	char *label;
+	char * type[3];
 	// struct s_op ;//opcode from global variable
 
 };
@@ -54,7 +58,7 @@ int valid_file(t_asm *champ, char *file_name);
 ** parse_tokens.c
 */
 void get_file(char *file, t_asm *champ);
-void parse_token(char *line, t_asm *champ, int row);
+void parse_token(char *line, t_asm *champ);
 
 /*
 ** free_error.c
@@ -66,8 +70,8 @@ void malloc_error(t_asm *champ, char *file);
 /*
 ** parse_header.c
 */
-void get_name_comment(char *line, t_asm *champ, int row, int len);
-void check_comment(int len, int row, char *str, char *line, t_asm *champ);
+void get_name_comment(char *line, t_asm *champ, int len);
+void check_comment(int len, char *str, char *line, t_asm *champ);
 char *str_to_char(char *str, char c);
 
 
@@ -75,14 +79,19 @@ char *str_to_char(char *str, char c);
 /*
 ** parse_op.c
 */
-int parse_op(char *line, int i, int op, int row);
-void check_op(char *ret, char *line, int op_name, int row, int column);
+int parse_op(char *ret, char *line, int i, int op, t_asm *champ);
+void check_op(char *ret, char *line, int op_name, t_asm *champ, int column);
 
 /*
 ** parse_param.c
 */
-void parse_param(int op, char **tab);
-int check_param(char *param);
+void parse_param(int op, char **tab, t_asm *champ);
+int check_param(char *param, t_asm *champ);
+int check_dir();
+int check_ind();
+int check_reg();
+
+int ft_strstri(const char *haystack, const char *needle);
 
 /*
 ** parse_label.c

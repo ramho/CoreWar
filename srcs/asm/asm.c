@@ -6,7 +6,7 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 12:30:34 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/05 15:42:18 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/06 17:45:51 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 
 void init_asm(t_asm *champ)
 {
+	champ->i = 0;
+	champ->row = 0;
 	champ->pos = 0;
 	champ->file_name = NULL;
 }

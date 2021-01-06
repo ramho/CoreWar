@@ -6,7 +6,7 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 12:30:49 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/06 16:19:03 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/06 18:14:09 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,10 @@
 void get_file(char *file, t_asm *champ)
 {
 	int fd;
-	int row;
 	char *line;
 	char *buf;
 
-	row = 1;
+	champ->row = 1;
 	if((fd = open(file, O_RDONLY)) <= 0)
 		file_error(champ, file, 2);
 	if(!(champ->header = ft_memalloc(sizeof(header_t))))
@@ -36,42 +35,43 @@ void get_file(char *file, t_asm *champ)
 	while ((get_next_line(fd, &line) > 0))
 	{
 		if ((buf = ft_strchr(line, '.')))
-			get_name_comment(buf, champ, row, ft_strlen(line));
+			get_name_comment(buf, champ, ft_strlen(line));
 		else
 		{
-			parse_token(line, champ, row);
+			parse_token(line, champ);
 		}
 		free(line);
-		row++;
+		champ->row++;
 	}
 }
 
-void parse_token(char *line, t_asm *champ, int row)
+void parse_token(char *line, t_asm *champ)
 {
-	int i;
+	// int i;
 	int flag;
 	char *ret;
 
-	i = 0;
-	while (ft_isspace(line[i]))
-		i++;
-	while(line && line[i] != '\0' && line[i] != '\n')
+	champ->i = 0;
+	champ->line = line;
+	while (ft_isspace(line[champ->i]))
+		champ->i++;
+	while(line && line[champ->i] != '\0' && line[champ->i] != '\n')
 	{
-		flag = i;
-		while (ft_strchr(LABEL_CHARS, line[i]))
-			i++;
-		ret = ft_strsub(line, flag, i - flag);
-		if (ft_isspace(line[i]))
-			check_label_error(line, i, row);
-		if (line[i] == '#' || line[i] == ';')
+		flag = champ->i;
+		while (ft_strchr(LABEL_CHARS, line[champ->i]))
+			champ->i++;
+		ret = ft_strsub(line, flag, champ->i - flag);
+		if (ft_isspace(line[champ->i]))
+			check_label_error(line, champ->i, champ->row);
+		if (line[champ->i] == '#' || line[champ->i] == ';')
 			return;
-		if (line[i] == LABEL_CHAR)
-			i = parse_label(line, i, row);
-		else if (line[i] == ' ')
+		if (line[champ->i] == LABEL_CHAR)
+			champ->i = parse_label(line, champ->i, champ->row);
+		else if (line[champ->i] == ' ')
 		{// find occurence of *str in a table //check id no :
-			check_op(ret, line + flag, i - flag,  row, flag + 1);
+			check_op(ret, line + flag, champ->i - flag, champ, flag + 1);
 			return ;
 		}
-		i++;
+		champ->i++;
 	}
 }

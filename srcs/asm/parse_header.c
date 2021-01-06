@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_header.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhoorntj <rhoorntj@student.s19.be>         +#+  +:+       +#+        */
+/*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 18:04:17 by rhoorntj          #+#    #+#             */
-/*   Updated: 2020/12/16 16:53:22 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/06 17:50:19 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/asm.h"
 
-void get_name_comment(char *line, t_asm *champ, int row, int len)
+void get_name_comment(char *line, t_asm *champ, int len)
 {
 	// printf("in get name comm [%s]\n", line);
 	char *str;
@@ -32,17 +32,17 @@ void get_name_comment(char *line, t_asm *champ, int row, int len)
 	}
 	else if ((str = ft_strstr(line, "comment")))
 	{
-		check_comment(len,row, str, line, champ);
+		check_comment(len, str, line, champ);
 	}
 	else
 	{
-		ft_printf("Lexical error at [%d:%d]\n", row, len  - (ft_strlen(line) - 1));
+		ft_printf("Lexical error at [%d:%d]\n", champ->row, len  - (ft_strlen(line) - 1));
 		exit(-1);
 		// syntax_error(tab[0], )
 	}
 }
 
-void check_comment(int len, int row, char *str, char *line, t_asm *champ)
+void check_comment(int len, char *str, char *line, t_asm *champ)
 {
 	int len2;
 	int i;
@@ -55,14 +55,14 @@ void check_comment(int len, int row, char *str, char *line, t_asm *champ)
 		if (str[i] != '\t' && str[i] != ' ')
 		{
 			str = str_to_char(str + i, ' ');
-			ft_printf("Syntax error at token [TOKEN][%03d:%03d] INSTRUCTION \"%s\"\n", row, len2 + (i + 1), str);
+			ft_printf("Syntax error at token [TOKEN][%03d:%03d] INSTRUCTION \"%s\"\n", champ->row, len2 + (i + 1), str);
 			exit (-1);
 		}
 		i++;
 	}
 	if ( i == ft_strlen(str))
 	{
-		ft_printf("Syntax error at token [TOKEN][%03d:%03d] ENDLINE\n", row, len + 1);
+		ft_printf("Syntax error at token [TOKEN][%03d:%03d] ENDLINE\n", champ->row, len + 1);
 		exit(-1);
 	}
 	tab = ft_strsplit(line, '"');

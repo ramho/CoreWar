@@ -6,31 +6,38 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 16:10:21 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/06 16:11:48 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/06 18:15:44 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/asm.h"
 
-void parse_param(int op, char **tab)
+void parse_param(int op, char **tab, t_asm *champ)
 {
 	printf("  in PARSE_PARAM op [%s]\n", g_op[op].name);
 	int i;
 	int param;
-
-	// printf(" DIR %s\n", ft_itoa_base(2, 2, 'm'));
+	char *type;
 
 	i = 0;
+	type = NULL;
 	while (i < g_op[op].args_num)
 	{
-		param = check_param(tab[i]);
+		param = check_param(ft_strtrim(tab[i]), champ);
 		if (g_op[op].args_types[i] & param)
 		{
 			printf("param [%d][%d] is OK  ", i, param);
+			//add to list
 		}
-		else
+		else if (param > 0)
 		{
-			printf("ERROR - param[ %d - %s ][%d] doesn't match\n", i, tab[i],param);
+			if (param == 1)
+				type = "register";
+			if (param == 2)
+				type = "direct";
+			if (param == 4)
+				type = "indirect";
+			ft_printf("Invalid parameter %d type %s for instruction %s\n", i, type, g_op[op].name); // find way to indicate type
 			exit(0);
 		}
 		i++;
@@ -38,16 +45,19 @@ void parse_param(int op, char **tab)
 	}
 }
 
-int check_param(char *param)// better to use index or move pointer directly ???
+int check_param(char *param, t_asm *champ)// better to use index or move pointer directly ???
 {
+	printf("    in CHECK_PARAM [%s]\n", param);
 	int i;
+	int check;
 
 	i = 0;
-	while(ft_isspace(param[i]))
-		i++;
 	if(param[i] == 'r')
 	{
-		return(T_REG);
+		check = ft_atoi(param + 1);
+		printf("check is [%d]\n", check);
+		if (check >= 1 && check <= 16)
+			return(T_REG);
 	}
 	else if (param[i] == '%')
 	{
@@ -57,5 +67,53 @@ int check_param(char *param)// better to use index or move pointer directly ???
 	{
 		return (T_IND);
 	}
-	return(1);
+	ft_printf("Syntax error at token [TOKEN][%03d:%03d] INSTRUCTION \"%s\"\n", champ->row, ft_strstri(champ->line, param) + 1, param); // row and line
+	exit(0);
+	return(0);
 }
+
+
+
+int ft_strstri(const char *haystack, const char *needle)
+{
+	int		i;
+	int		j;
+	int		k;
+	char	*haystack2;
+
+	haystack2 = (char *)haystack;
+	if (needle[0] == '\0')
+		return (0);
+	i = 0;
+	while (haystack2[i] != '\0')
+	{
+		j = 0;
+		k = i;
+		while (haystack2[i] != '\0' && needle[j] != '\0'
+			&& haystack2[i] == needle[j])
+		{
+			i++;
+			j++;
+		}
+		if (needle[j] == '\0')
+			return (k);
+		i = k;
+		i++;
+	}
+	return (0);
+}
+
+// int check_dir()
+// {
+//
+// }
+//
+// int check_ind()
+// {
+//
+// }
+//
+// int check_reg()
+// {
+//
+// }

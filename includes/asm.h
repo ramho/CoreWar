@@ -54,12 +54,7 @@ int valid_file(t_asm *champ, char *file_name);
 ** parse_tokens.c
 */
 void get_file(char *file, t_asm *champ);
-void get_opcode(char *line, t_asm *champ, int row);
-int parse_label(char *line, int i, int row);
-int parse_op(char *line, int i, int op);
-// void parse_param(char **tab);
-void parse_param(int op, char **tab);
-int check_param(char *param);
+void parse_token(char *line, t_asm *champ, int row);
 
 /*
 ** free_error.c
@@ -78,16 +73,22 @@ char *str_to_char(char *str, char c);
 
 
 /*
-**
+** parse_op.c
 */
+int parse_op(char *line, int i, int op, int row);
+void check_op(char *ret, char *line, int op_name, int row, int column);
 
 /*
-**
+** parse_param.c
 */
+void parse_param(int op, char **tab);
+int check_param(char *param);
 
 /*
-**
+** parse_label.c
 */
+void check_label_error(char *line, int index, int row);
+int parse_label(char *line, int i, int row);
 
 /*
 **

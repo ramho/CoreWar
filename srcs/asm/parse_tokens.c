@@ -6,7 +6,7 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 12:30:49 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/05 17:47:19 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/06 16:19:03 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,16 @@ void get_file(char *file, t_asm *champ)
 			get_name_comment(buf, champ, row, ft_strlen(line));
 		else
 		{
-			get_opcode(line, champ, row);
+			parse_token(line, champ, row);
 		}
 		free(line);
 		row++;
 	}
 }
 
-void get_opcode(char *line, t_asm *champ, int row)
+void parse_token(char *line, t_asm *champ, int row)
 {
 	int i;
-	int j;
 	int flag;
 	char *ret;
 
@@ -62,110 +61,17 @@ void get_opcode(char *line, t_asm *champ, int row)
 		while (ft_strchr(LABEL_CHARS, line[i]))
 			i++;
 		ret = ft_strsub(line, flag, i - flag);
+		if (ft_isspace(line[i]))
+			check_label_error(line, i, row);
 		if (line[i] == '#' || line[i] == ';')
-		{
 			return;
-		}
 		if (line[i] == LABEL_CHAR)
-		{
 			i = parse_label(line, i, row);
-			free(ret);
-		}
-		else if (line[i] == ' ')// find occurence of *str in a table //check id no :
-		 {
-			 j = 0;
-			 while ( j < 16)
-			 {
-				 if (ft_strcmp(ret, g_op[j].name) == 0)
-			 	{
-					if (parse_op(line + flag, i - flag, j))
-						return ;
-		 		}
-				j++;
-			}
+		else if (line[i] == ' ')
+		{// find occurence of *str in a table //check id no :
+			check_op(ret, line + flag, i - flag,  row, flag + 1);
+			return ;
 		}
 		i++;
 	}
-}
-
-int parse_label(char *line, int i, int row)
-{
-	printf(" in PARSE_LABEL [%s]\n", line);
-	char *label_name;
-
-	label_name = malloc(sizeof(char*) * i);
-	ft_strncpy(label_name, line, i);
-	i += 1;
-	while (ft_isspace(line[i]))
-		i++;
-	return (i - 1); // to cancel out the i++ in get_opcode
-}
-
-int parse_op(char *line, int i, int op)
-{
-	printf(" in PARSE_OP\n");
-	int j;
-	char **tab;
-
-	tab = ft_strsplit(line + i, SEPARATOR_CHAR);
-	j = 0;
-	while (tab[j] != NULL)
-	{
-		j++;
-	}
-	if (j != g_op[op].args_num)
-	{
-		printf("ERROR\n");
-		exit(0);
-	}
-	parse_param(op, tab);
-	return (1);
-}
-
-void parse_param(int op, char **tab)
-{
-	printf("  in PARSE_PARAM op [%s]\n", g_op[op].name);
-	int i;
-	int param;
-
-	// printf(" DIR %s\n", ft_itoa_base(2, 2, 'm'));
-
-	i = 0;
-	while (i < g_op[op].args_num)
-	{
-		param = check_param(tab[i]);
-		if (g_op[op].args_types[i] & param)
-		{
-			printf("param [%d][%d] is OK  ", i, param);
-		}
-		else
-		{
-			printf("ERROR - param[ %d - %s ][%d] doesn't match\n", i, tab[i],param);
-			exit(0);
-		}
-		i++;
-		printf("\n");
-	}
-}
-
-int check_param(char *param)// better to use index or move pointer directly ???
-{
-	int i;
-
-	i = 0;
-	while(ft_isspace(param[i]))
-		i++;
-	if(param[i] == 'r')
-	{
-		return(T_REG);
-	}
-	else if (param[i] == '%')
-	{
-		return(T_DIR);
-	}
-	else if (ft_isdigit(param[i]))
-	{
-		return (T_IND);
-	}
-	return(1);
 }

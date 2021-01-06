@@ -1,0 +1,32 @@
+else if (ft_strchr(LABEL_CHARS, line[i]))
+{
+	flag = i;
+	j = 0;
+	ret = NULL;
+	ret = ft_strsub(line, flag, i - flag);
+	printf("\tRET 2 [%s]\n", ret);
+	while ( j < 16)
+	{
+		if (ft_strcmp(ret, g_op[j].name) == 0)
+	   {
+		   if (parse_op(line, flag))
+			   return ;
+	   }
+	   j++;
+   }
+
+}
+
+
+_.--.__.-'""`-.__.--.__.-'""`-.__.--.__.-'""`-.__.--.__.-'""`-._
+                              ERROR
+"`--'""`-.__.-'""`--'""`-.__.-'""`--'""`-.__.-'""`--'""`-.__.-'"
+
+line   --> loop:     sti
+output --> Syntax error at token [TOKEN][004:014] ENDLINE
+
+
+
+line --> loop:     sti    r1, %:test, %1 (label test doesn't exist elsewhere in file)
+	 --> error to add when encoding to byte
+ouput --> No such label test while attempting to dereference token [TOKEN][004:022] DIRECT_LABEL "%:test"

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhoorntj <rhoorntj@student.s19.be>         +#+  +:+       +#+        */
+/*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 15:18:51 by rhoorntj          #+#    #+#             */
-/*   Updated: 2020/10/16 17:43:16 by Ramata           ###   ########.fr       */
+/*   Updated: 2021/01/06 18:28:19 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,7 @@ char				*ft_strchr(const char *s, int c);
 size_t				ft_strchri(const char *s, int c);
 char				*ft_strrchr(const char *s, int c);
 char				*ft_strstr(const char *haystack, const char *needle);
+int					ft_strstri(const char *haystack, const char *needle);
 char				*ft_strnstr(const char *haystack, const char *needle,
 						size_t len);
 int					ft_strcmp(const char *s1, const char *s2);

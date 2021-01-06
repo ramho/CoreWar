@@ -30,6 +30,7 @@ struct s_token
 	int size_param;
 	int8_t	encoded_byte; // size of 1 byte
 	char *label;
+	char *line; //so can check index of error label later on using strstri
 	char * type[3];
 	// struct s_op ;//opcode from global variable
 
@@ -91,8 +92,6 @@ int check_dir();
 int check_ind();
 int check_reg();
 
-int ft_strstri(const char *haystack, const char *needle);
-
 /*
 ** parse_label.c
 */
@@ -100,7 +99,7 @@ void check_label_error(char *line, int index, int row);
 int parse_label(char *line, int i, int row);
 
 /*
-**
+** chained_list.c
 */
 
 /*

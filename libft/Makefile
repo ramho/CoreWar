@@ -6,7 +6,7 @@
 #    By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/12 15:08:31 by rhoorntj          #+#    #+#              #
-#    Updated: 2020/03/06 17:25:24 by rhoorntj         ###   ########.fr        #
+#    Updated: 2021/01/06 18:29:42 by rhoorntj         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRC = ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_memchr.c \
 	  ft_lstnew.c ft_lstdelone.c ft_lstdel.c ft_lstadd.c ft_lstiter.c \
 	  ft_lstmap.c ft_isspace.c ft_memdel1.c ft_countwords.c \
 	  get_next_line.c ft_itoa_base.c ft_count_sym.c ft_count_num.c\
-	  ft_strjoin_n_free.c  ft_u_itoa_base.c ft_strtrim_char.c\
+	  ft_strjoin_n_free.c ft_u_itoa_base.c ft_strtrim_char.c ft_strstri.c\
 		ft_printf/convert_csp.c ft_printf/convert_di.c ft_printf/convert_oux.c\
 		ft_printf/convert_f.c ft_printf/convert_modulo.c \
 		ft_printf/width_n_final_flag.c ft_printf/precision_flag.c \

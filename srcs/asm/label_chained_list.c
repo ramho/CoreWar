@@ -6,7 +6,7 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 14:05:40 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/08 15:46:10 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/08 16:31:28 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void add_label_link(t_label *new, t_asm *champ)
 		new->next = champ->head;
 		champ->head = new;
 	}
+	champ->head->flag = 1;
 
 // FOR DEBUGING ONLY
 	// index = champ->head;

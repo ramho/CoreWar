@@ -6,7 +6,7 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 16:04:14 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/08 16:11:09 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/08 18:36:00 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ void	init_label_struct(t_asm *champ)
 		free(champ);
 		exit(0);
 	}
-	champ->head->name = NULL;
 	champ->head->pos = 0;
+	champ->head->flag = 0;
+	champ->head->name = NULL;
 	champ->head->next = NULL;
 }
 
@@ -50,6 +51,8 @@ void	init_token_struct(t_asm *champ)
 	champ->first->encoded_byte = 0;
 	champ->first->label = NULL;
 	champ->first->line = NULL;
+	champ->first->column = 0;
 	while (++i < 3)
 		champ->first->param[i] = NULL;
+		champ->first->param_type[i] = 0;
 }

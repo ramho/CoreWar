@@ -25,17 +25,20 @@ struct	s_asm
 	struct header_s *header;
 	struct	s_label *head;
 	struct s_token *first;
+	struct s_token *new_token;
 };
 
 struct s_token
 {
-	int pos; // position in byte to use if label
-	int op_code; // opcode value to find in t_op
-	int8_t	encoded_byte; // size of 1 byte only if t_op->args_type_code true
-	char *label; // name of label so can find it in label chained list
-	char *line; //so can check index of error label later on using strstri
-	char * param[3]; // poir sauvegarder les valeur
-	// struct s_op ;//opcode from global variable
+	int pos; // [*] position in byte to use if label
+	int op_code; // [*] opcode value to find in t_op
+	int8_t	encoded_byte; // [ ] size of 1 byte only if t_op->args_type_code true
+	char *label; // [*] name of label so can find it in label chained list
+	char *param[3]; // [ ] poir sauvegarder les valeur
+	int param_type[3]; // type of param
+	char *line; // [*]so can check index of error label later on using strstri
+	int column; // [*] have index for error mgmt // can keep in in asm
+	struct s_token *next;
 };
 
 struct s_param
@@ -50,6 +53,7 @@ typedef struct s_label
 {
 	char *name;
 	int pos;
+	int flag;
 	struct s_label *next;
 } t_label ;
 
@@ -89,17 +93,17 @@ char *str_to_char(char *str, char c);
 /*
 ** parse_op.c
 */
-int parse_op(char *ret, char *line, int i, int op, t_asm *champ);
-void check_op(char *ret, char *line, int op_name, t_asm *champ, int column);
+int parse_op(char *ret, char *line, int i, int op, t_asm *champ, int column);
+void check_op(char *name, char *line, int size_op, t_asm *champ, int column);
 
 /*
 ** parse_param.c
 */
 void parse_param(int op, char **tab, t_asm *champ);
-int check_param(char *param, t_asm *champ);
-int check_dir();
-int check_ind();
-int check_reg();
+int check_param(char *param, t_asm *champ, int param_i);
+int check_dir(char *param, int param_i, t_asm *champ);
+int check_ind(char *param, int param_i, t_asm *champ);
+int check_reg(char *param, int param_i, t_asm *champ);
 
 /*
 ** parse_label.c
@@ -110,6 +114,8 @@ int parse_label(char *line, int i, int row, t_asm *champ);
 /*
 ** op_chained_list.c
 */
+void add_op_link(t_token *new, t_asm *champ);
+t_token *init_op_link(t_token *new, t_token *first);
 
 /*
 ** label_chained_list.c

@@ -20,9 +20,10 @@ struct	s_asm
 	int row;
 	int pos; //  number of bytes
 	char *line;
-	char * file_name;
+	char *file_name;
 	char **file;
 	struct header_s *header;
+	struct	s_label *head;
 };
 
 struct s_token
@@ -34,8 +35,6 @@ struct s_token
 	char *line; //so can check index of error label later on using strstri
 	char * type[3];
 	// struct s_op ;//opcode from global variable
-struct	s_label *head;
-
 };
 
 struct s_param
@@ -113,7 +112,8 @@ int parse_label(char *line, int i, int row, t_asm *champ);
 /*
 ** label_chained_list.c
 */
-add_label_link(t_label new);
+void add_label_link(t_label *new, t_asm *champ);
+t_label *init_link(t_label *new, t_label *head);
 
 
 typedef enum

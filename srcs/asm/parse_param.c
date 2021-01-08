@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_param.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhoorntj <rhoorntj@student.s19.be>         +#+  +:+       +#+        */
+/*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 16:10:21 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/07 13:34:31 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/08 14:15:28 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void parse_param(int op, char **tab, t_asm *champ)
 {
-	printf("  in PARSE_PARAM op [%s]\n", g_op[op].name);
+	// printf("  in PARSE_PARAM op [%s]\n", g_op[op].name);
 	int i;
 	int param;
 	char *type;
@@ -26,7 +26,7 @@ void parse_param(int op, char **tab, t_asm *champ)
 		param = check_param(ft_strtrim(tab[i]), champ);
 		if (g_op[op].args_types[i] & param)
 		{
-			printf("param [%d][%d] is OK  ", i, param);
+			// printf("param [%d][%d] is OK  ", i, param);
 			//add to list
 		}
 		else if (param > 0)
@@ -41,13 +41,13 @@ void parse_param(int op, char **tab, t_asm *champ)
 			exit(0);
 		}
 		i++;
-		printf("\n");
+		// printf("\n");
 	}
 }
 
 int check_param(char *param, t_asm *champ)// better to use index or move pointer directly ???
 {
-	printf("    in CHECK_PARAM [%s]\n", param);
+	// printf("    in CHECK_PARAM [%s]\n", param);
 	int i;
 	int check;
 
@@ -57,7 +57,7 @@ int check_param(char *param, t_asm *champ)// better to use index or move pointer
 	if(param[i] == 'r')
 	{
 		check = ft_atoi(param + 1);
-		printf("check is [%d]\n", check);
+		// printf("check is [%d]\n", check);
 		if (check >= 1 && check <= 16)
 			return(T_REG);
 	}
@@ -70,11 +70,11 @@ int check_param(char *param, t_asm *champ)// better to use index or move pointer
 		i++;
 		if (param[i] == LABEL_CHAR)
 		{
-			printf("label dir\n");
+			// printf("label dir\n");
 		}
 		else
 		{
-			printf("int dir\n");
+			// printf("int dir\n");
 		}
 		return(T_DIR);
 	}
@@ -86,7 +86,7 @@ int check_param(char *param, t_asm *champ)// better to use index or move pointer
 	{
 		if (param[i] == LABEL_CHAR)
 		{
-			printf("label ind\n");
+			// printf("label ind\n");
 		}
 		else
 		{

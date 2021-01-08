@@ -6,7 +6,7 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 12:30:34 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/06 17:45:51 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/08 13:42:26 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,17 @@ void init_asm(t_asm *champ)
 	champ->row = 0;
 	champ->pos = 0;
 	champ->file_name = NULL;
+
+	//init of label struct
+	if(!(champ->head = ft_memalloc(sizeof(t_label))))
+	{
+		free(champ);
+		exit(0);
+	}
+	champ->head->name = NULL;
+	champ->head->pos = 0;
+	champ->head->next = NULL;
+
 }
 
 t_asm *check_arg(int ac, t_asm *champ)

@@ -6,7 +6,7 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 14:19:25 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/06 18:04:33 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/08 14:14:55 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void check_op(char *ret, char *line, int op_name, t_asm *champ, int column)
  {
-	 printf("in CHECK_OP\n");
+	 // printf("in CHECK_OP\n");
 	 // printf("   ret [%s] line [%s] row %d\n",ret, line, row);
 	 int j;
 
@@ -35,7 +35,7 @@ void check_op(char *ret, char *line, int op_name, t_asm *champ, int column)
 
  int parse_op(char *ret, char *line, int i, int op, t_asm *champ)
  {
- 	printf(" in PARSE_OP row %d\n", champ->row);
+ 	// printf(" in PARSE_OP row %d\n", champ->row);
  	int j;
  	char **tab;
 

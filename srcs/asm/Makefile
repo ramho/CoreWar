@@ -6,7 +6,7 @@
 #    By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/24 14:36:19 by rhoorntj          #+#    #+#              #
-#    Updated: 2021/01/06 18:51:09 by rhoorntj         ###   ########.fr        #
+#    Updated: 2021/01/08 13:34:39 by rhoorntj         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,9 @@ NAME	= asm
 CFLAGS	= #-Wall -Wextra -Werror
 
 SRC		=	asm.c free_error.c parse_tokens.c valid_file.c parse_header.c \
-			parse_op.c parse_param.c parse_label.c chained_list.c
+			parse_op.c parse_param.c parse_label.c chained_list.c \
+			label_chained_list.c
+
 OBJ		= $(SRC:.c=.o)
 LIB		= -L../../libft -lft
 

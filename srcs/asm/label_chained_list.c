@@ -1,53 +1,45 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   label_chained_list.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/01/08 14:05:40 by rhoorntj          #+#    #+#             */
+/*   Updated: 2021/01/08 14:54:57 by rhoorntj         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/asm.h"
 
-add_label_link(t_label new, t_label *head)
+void add_label_link(t_label *new, t_asm *champ)
 {
-  if (head == NULL)
-  {
-    //make head new link
-  }
-  else
-  {
-    //add at start of list
-  }
+	t_label *index;
+	if (champ->head->name == NULL)
+	{
+		champ->head = init_link(new, champ->head);
+	}
+	else
+	{
+		new->next = champ->head;
+		champ->head = new;
+	}
+
+// FOR DEBUGING ONLY
+	// index = champ->head;
+	// while (index)
+	// {
+	// 	index = index->next;
+	// }
+// END
+
 }
 
 
-void init_link(t_label new, t_label *head)
+t_label *init_link(t_label *new, t_label *head)
 {
-  if(!(head = malloc(sizeof(t_label *))))
-    {
-      printf("malloc error \n");
-      exit(0);
-    }
-  head->name = new.name;
-  head->pos = new.pos;
-  head->next = NULL;
-
+	head->name = new->name;
+	head->pos = new->pos;
+	head->next = NULL;
+	return(head);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-t_liste *liste;
-t_tetro *tetro;
-
-if (!(liste = malloc(sizeof(*liste))) ||
-    !(tetro = malloc(sizeof(*tetro))))
-  return (NULL);
-tetro->lettre = 'A';
-put_in_tab(single_tetro, tetro);
-tetro->next = NULL;
-liste->head_tetro = tetro;
-return (liste);

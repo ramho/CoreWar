@@ -32,6 +32,10 @@ line --> loop:     sti    r1, %:test, %1 (label test doesn't exist elsewhere in 
 ouput --> No such label test while attempting to dereference token [TOKEN][004:022] DIRECT_LABEL "%:test"
 
 
+line -->		only you:
+have -->		Invalid instruction at token [TOKEN][011:001] INSTRUCTION "only"
+should be -->	Syntax error at token [TOKEN][011:006] LABEL "you:"
+
 
 
 
@@ -50,3 +54,10 @@ _.--.__.-'""`-.__.--.__.-'""`-.__.--.__.-'""`-.__.--.__.-'""`-._
 saving opcode
 
 name, position, size in bytes ( tracker will be in champ)
+
+
+_.--.__.-'""`-.__.--.__.-'""`-.__.--.__.-'""`-.__.--.__.-'""`-._
+                            TO DO
+"`--'""`-.__.-'""`--'""`-.__.-'""`--'""`-.__.-'""`--'""`-.__.-'"
+
+when chained list of instruction, calculate position and modify for label

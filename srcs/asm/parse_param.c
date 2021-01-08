@@ -6,7 +6,7 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 16:10:21 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/08 14:15:28 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/08 16:08:38 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,12 @@ int check_param(char *param, t_asm *champ)// better to use index or move pointer
 	i = 0;
 
 
-	if(param[i] == 'r')
+	if (param[i] == 'r')
 	{
 		check = ft_atoi(param + 1);
 		// printf("check is [%d]\n", check);
 		if (check >= 1 && check <= 16)
-			return(T_REG);
+			return (T_REG);
 	}
 
 
@@ -76,7 +76,7 @@ int check_param(char *param, t_asm *champ)// better to use index or move pointer
 		{
 			// printf("int dir\n");
 		}
-		return(T_DIR);
+		return (T_DIR);
 	}
 
 
@@ -96,7 +96,7 @@ int check_param(char *param, t_asm *champ)// better to use index or move pointer
 	}
 	ft_printf("Syntax error at token [TOKEN][%03d:%03d] INSTRUCTION \"%s\"\n", champ->row, ft_strstri(champ->line, param) + 1, param); // row and line
 	exit(0);
-	return(0);
+	return (0);
 }
 
 

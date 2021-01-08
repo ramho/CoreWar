@@ -6,7 +6,7 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 12:30:49 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/08 13:29:06 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/08 16:08:26 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void get_file(char *file, t_asm *champ)
 	char *buf;
 
 	champ->row = 1;
-	if((fd = open(file, O_RDONLY)) <= 0)
+	if ((fd = open(file, O_RDONLY)) <= 0)
 		file_error(champ, file, 2);
-	if(!(champ->header = ft_memalloc(sizeof(header_t))))
+	if (!(champ->header = ft_memalloc(sizeof(header_t))))
 	{
 		free(champ);
 		exit(-1);
@@ -56,7 +56,7 @@ void parse_token(char *line, t_asm *champ)
 	champ->line = line;
 	while (ft_isspace(line[champ->i]))
 		champ->i++;
-	while(line && line[champ->i] != '\0' && line[champ->i] != '\n')
+	while (line && line[champ->i] != '\0' && line[champ->i] != '\n')
 	{
 		flag = champ->i;
 		while (ft_strchr(LABEL_CHARS, line[champ->i]))

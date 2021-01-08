@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_error.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhoorntj <rhoorntj@student.s19.be>         +#+  +:+       +#+        */
+/*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 12:30:41 by rhoorntj          #+#    #+#             */
-/*   Updated: 2020/11/25 18:06:42 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/08 15:12:34 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,20 @@ void malloc_error(t_asm *champ, char *file)
 	ft_printf("Malloc error in %s\n", file);
 	free(champ);
 	exit (-1);
+}
+
+void free_chained_label(t_asm *champ)
+{
+	t_label *index;
+	int i = 0;
+
+	index = champ->head;
+	while (champ->head)
+	{
+		index = champ->head;
+		champ->head = champ->head->next;
+		free(index);
+		i++;
+	}
+	// exit(0);
 }

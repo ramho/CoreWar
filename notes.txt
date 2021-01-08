@@ -61,3 +61,5 @@ _.--.__.-'""`-.__.--.__.-'""`-.__.--.__.-'""`-.__.--.__.-'""`-._
 "`--'""`-.__.-'""`--'""`-.__.-'""`--'""`-.__.-'""`--'""`-.__.-'"
 
 when chained list of instruction, calculate position and modify for label
+
+most optimal way of stocking info if nuber not known in advance ?

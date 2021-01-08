@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   label_chained_list.c                               :+:      :+:    :+:   */
+/*   op_chained_list.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/08 14:05:40 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/08 15:46:10 by rhoorntj         ###   ########.fr       */
+/*   Created: 2021/01/06 18:48:52 by rhoorntj          #+#    #+#             */
+/*   Updated: 2021/01/08 16:08:38 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/asm.h"
 
-void add_label_link(t_label *new, t_asm *champ)
+// initiliase a tab of 3 to null
+//
+// init new_link
+
+void add_op_link(t_label *new, t_asm *champ)
 {
-	t_label *index;
-	if (champ->head->name == NULL)
-	{
-		champ->head = init_label_link(new, champ->head);
-	}
-	else
-	{
-		new->next = champ->head;
-		champ->head = new;
-	}
+	// t_label *index;
+	// if (champ->head->name == NULL)
+	// {
+	// 	champ->head = init_link(new, champ->head);
+	// }
+	// else
+	// {
+	// 	new->next = champ->head;
+	// 	champ->head = new;
+	// }
 
 // FOR DEBUGING ONLY
 	// index = champ->head;
@@ -36,10 +40,10 @@ void add_label_link(t_label *new, t_asm *champ)
 }
 
 
-t_label *init_label_link(t_label *new, t_label *head)
+void init_op_link(t_label *new, t_label *head)
 {
-	head->name = new->name;
-	head->pos = new->pos;
-	head->next = NULL;
-	return (head);
+	// head->name = new->name;
+	// head->pos = new->pos;
+	// head->next = NULL;
+	// return (head);
 }

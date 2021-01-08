@@ -21,19 +21,20 @@ struct	s_asm
 	int pos; //  number of bytes
 	char *line;
 	char *file_name;
-	char **file;
+	// char **file;
 	struct header_s *header;
 	struct	s_label *head;
+	struct s_token *first;
 };
 
 struct s_token
 {
-	int pos;
-	int size_param;
-	int8_t	encoded_byte; // size of 1 byte
-	char *label;
+	int pos; // position in byte to use if label
+	int op_code; // opcode value to find in t_op
+	int8_t	encoded_byte; // size of 1 byte only if t_op->args_type_code true
+	char *label; // name of label so can find it in label chained list
 	char *line; //so can check index of error label later on using strstri
-	char * type[3];
+	char * param[3]; // poir sauvegarder les valeur
 	// struct s_op ;//opcode from global variable
 };
 
@@ -76,6 +77,7 @@ void parse_token(char *line, t_asm *champ);
 void invalid_header(t_asm *champ, int error);
 void file_error(t_asm *champ, char *file_name, int error);
 void malloc_error(t_asm *champ, char *file);
+void free_chained_label(t_asm *champ);
 
 /*
 ** parse_header.c
@@ -113,8 +115,25 @@ int parse_label(char *line, int i, int row, t_asm *champ);
 ** label_chained_list.c
 */
 void add_label_link(t_label *new, t_asm *champ);
-t_label *init_link(t_label *new, t_label *head);
+t_label *init_label_link(t_label *new, t_label *head);
 
+/*
+** init.c
+*/
+void init_asm(t_asm *champ);
+void init_label_struct(t_asm *champ);
+void init_token_struct(t_asm *champ);
+/*
+**
+*/
+
+/*
+**
+*/
+
+/*
+**
+*/
 
 typedef enum
 {

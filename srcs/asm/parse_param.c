@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_param.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rhoorntj <rhoorntj@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 16:10:21 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/06 18:56:33 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/07 13:34:31 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ int check_param(char *param, t_asm *champ)// better to use index or move pointer
 	int check;
 
 	i = 0;
+
+
 	if(param[i] == 'r')
 	{
 		check = ft_atoi(param + 1);
@@ -59,24 +61,32 @@ int check_param(char *param, t_asm *champ)// better to use index or move pointer
 		if (check >= 1 && check <= 16)
 			return(T_REG);
 	}
-	else if (param[i] == '%')
+
+
+
+
+	else if (param[i] == '%') // dir
 	{
 		i++;
 		if (param[i] == LABEL_CHAR)
 		{
 			printf("label dir\n");
 		}
-		elsewhere
+		else
 		{
-			printf("int dir\n")
+			printf("int dir\n");
 		}
 		return(T_DIR);
 	}
-	else if (ft_isdigit(param[i]) ||  param[i] == LABEL_CHAR)
+
+
+
+
+	else if (ft_isdigit(param[i]) ||  param[i] == LABEL_CHAR) // ind
 	{
 		if (param[i] == LABEL_CHAR)
 		{
-			printf("label ind\n")
+			printf("label ind\n");
 		}
 		else
 		{

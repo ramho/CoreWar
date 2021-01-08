@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rhoorntj <rhoorntj@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 12:30:49 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/06 18:14:09 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/07 18:31:12 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ void parse_token(char *line, t_asm *champ)
 	int flag;
 	char *ret;
 
-	champ->i = 0;
+	champ->i = 0; // can put in init asm.c
+	champ->pos = 0; // can put in init of asm.c
 	champ->line = line;
 	while (ft_isspace(line[champ->i]))
 		champ->i++;
@@ -66,7 +67,7 @@ void parse_token(char *line, t_asm *champ)
 		if (line[champ->i] == '#' || line[champ->i] == ';')
 			return;
 		if (line[champ->i] == LABEL_CHAR)
-			champ->i = parse_label(line, champ->i, champ->row);
+			champ->i = parse_label(line, champ->i, champ->row, champ);
 		else if (line[champ->i] == ' ')
 		{// find occurence of *str in a table //check id no :
 			check_op(ret, line + flag, champ->i - flag, champ, flag + 1);

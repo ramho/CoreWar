@@ -12,12 +12,13 @@
 typedef struct s_asm t_asm;
 typedef struct s_token t_token;
 typedef struct s_param t_param;
+// typedef struct s_label t_label;
 
 struct	s_asm
 {
 	int i;
 	int row;
-	int pos;
+	int pos; //  number of bytes
 	char *line;
 	char * file_name;
 	char **file;
@@ -33,6 +34,7 @@ struct s_token
 	char *line; //so can check index of error label later on using strstri
 	char * type[3];
 	// struct s_op ;//opcode from global variable
+struct	s_label *head;
 
 };
 
@@ -41,7 +43,15 @@ struct s_param
 		int type;
 		int size;
 		int hex;
+		char *label;
 };
+
+typedef struct s_label
+{
+	char *name;
+	int pos;
+	struct s_label *next;
+} t_label ;
 
 
 /*
@@ -75,8 +85,6 @@ void get_name_comment(char *line, t_asm *champ, int len);
 void check_comment(int len, char *str, char *line, t_asm *champ);
 char *str_to_char(char *str, char c);
 
-
-
 /*
 ** parse_op.c
 */
@@ -96,15 +104,18 @@ int check_reg();
 ** parse_label.c
 */
 void check_label_error(char *line, int index, int row);
-int parse_label(char *line, int i, int row);
+int parse_label(char *line, int i, int row, t_asm *champ);
 
 /*
-** chained_list.c
+** op_chained_list.c
 */
 
 /*
-**
+** label_chained_list.c
 */
+add_label_link(t_label new);
+
+
 typedef enum
 {
 	false,
@@ -116,7 +127,7 @@ typedef struct	s_op
 	char		*name;
 	uint8_t		code;
 	uint8_t		args_num;
-	int			args_types_code; //
+	int			args_types_code; // encoded byte
 	uint8_t		args_types[3];
 	uint8_t		t_dir_size;
 }				t_op;

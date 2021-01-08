@@ -30,3 +30,23 @@ output --> Syntax error at token [TOKEN][004:014] ENDLINE
 line --> loop:     sti    r1, %:test, %1 (label test doesn't exist elsewhere in file)
 	 --> error to add when encoding to byte
 ouput --> No such label test while attempting to dereference token [TOKEN][004:022] DIRECT_LABEL "%:test"
+
+
+
+
+
+_.--.__.-'""`-.__.--.__.-'""`-.__.--.__.-'""`-.__.--.__.-'""`-._
+                            encoding
+"`--'""`-.__.-'""`--'""`-.__.-'""`--'""`-.__.-'""`--'""`-.__.-'"
+
+
+
+1. name
+2. encoded byte (code it in chained list)
+3. params
+3.1.	if param a label, check position in table of labels (chained list)
+
+
+saving opcode
+
+name, position, size in bytes ( tracker will be in champ)

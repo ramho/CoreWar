@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+         #
+#    By: rhoorntj <rhoorntj@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/12 15:08:31 by rhoorntj          #+#    #+#              #
-#    Updated: 2021/01/06 18:29:42 by rhoorntj         ###   ########.fr        #
+#    Updated: 2021/01/07 12:21:49 by rhoorntj         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ SRC = ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_memchr.c \
 		ft_printf/width_n_final_flag.c ft_printf/precision_flag.c \
 		ft_printf/ft_printf.c ft_printf/parse_flags.c ft_printf/parse_flags_bis.c \
 		ft_printf/start_conversion.c ft_printf/length_modifiers_flag.c \
-		ft_printf/free.c  ft_strchri.c ft_pos_i.c ft_numlen.c\
+		ft_printf/free.c  ft_strchri.c ft_pos_i.c ft_numlen.c ft_strstri.c\
 
 
 FLAGS = -Wall -Werror -Wextra

@@ -6,7 +6,7 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 12:30:34 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/11 17:17:34 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/11 18:47:42 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,23 @@ int	main(int ac, char **av)
 	init_asm(champ);
 	if (valid_file(champ,  av[ac - 1]))
 		get_file(av[ac - 1], champ);
+
+		// FOR DEBUGING ONLY
+		t_label *index;
+			index = champ->head;
+			while (index)
+			{
+				printf("name [%s] post[%d]\n", index->name, index->pos);
+				index = index->next;
+			}
+
+		t_token *index2;
+		index2 = champ->first;
+		while (index2)
+		{
+			printf("\tline [%s] name [%s] label [%s]\n", index2->line, g_op[index2->op_code].name, index2->label);
+			index2 = index2->next;
+		}
+		// END
 	return (0);
 }

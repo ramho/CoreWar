@@ -63,3 +63,5 @@ _.--.__.-'""`-.__.--.__.-'""`-.__.--.__.-'""`-.__.--.__.-'""`-._
 when chained list of instruction, calculate position and modify for label
 
 most optimal way of stocking info if nuber not known in advance ?
+
+how to set an array to null

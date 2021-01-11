@@ -6,7 +6,7 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 14:19:25 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/11 17:38:59 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/11 18:42:41 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 void check_op(char *name, char *line, int size_op, t_asm *champ, int column)
  {
-	 printf("in CHECK_OP\n");
-	 printf("   name [%s] line [%s] column [%d]\n",name, line, column);
+	 // printf("in CHECK_OP\n");
+	 // printf("   name [%s] line [%s] column [%d]\n",name, line, column);
 	 int j;
 
 	 j = 0;

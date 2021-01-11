@@ -6,7 +6,7 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 12:30:49 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/11 17:56:28 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/11 18:42:08 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 void get_file(char *file, t_asm *champ)
 {
 	int fd;
+	int start;
 	char *line;
 	char *buf;
 
@@ -35,6 +36,8 @@ void get_file(char *file, t_asm *champ)
 	while ((get_next_line(fd, &line) > 0))
 	{
 		//check if comment before title like in car.s
+		start = ft_pos_i(line, '#');
+		line = ft_strsub(line, 0, start); // malloc free to check
 		if ((buf = ft_strchr(line, '.')))
 			get_name_comment(buf, champ, ft_strlen(line));
 		else
@@ -48,6 +51,7 @@ void get_file(char *file, t_asm *champ)
 
 void parse_token(char *line, t_asm *champ)
 {
+	// printf("in PARSE_TOKEN line [%s]\n", line);
 	// int i;
 	int flag;
 	char *ret;

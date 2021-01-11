@@ -6,12 +6,11 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 16:14:27 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/11 17:21:30 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/11 18:13:47 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/asm.h"
-
 
 void check_label_error(char *line, int index, int row)
 {
@@ -31,7 +30,7 @@ void check_label_error(char *line, int index, int row)
 
 int parse_label(char *line, int i, int row, t_asm *champ)
 {
-	printf("in PARSE_LABEL [%s] row %d\n", line, row);
+	//printf("in PARSE_LABEL [%s] row %d\n", line, row);
 	t_label *new;
 
 	if (!(new = ft_memalloc(sizeof(t_label))))

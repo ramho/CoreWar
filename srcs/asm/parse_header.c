@@ -6,7 +6,7 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 18:04:17 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/11 16:41:18 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/11 18:39:13 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ void get_name_comment(char *line, t_asm *champ, int len)
 	if ((str = ft_strstr(line, "name")))
 	{
 		tab = ft_strsplit(line, '"');
+		if (tab[1] == NULL)
+		{
+			// champ->header->prog_name = ; // set an array to null?
+			return ;
+		}
 		if (ft_strlen(tab[1]) <= PROG_NAME_LENGTH)
 			ft_memcpy(champ->header->prog_name, tab[1], ft_strlen(tab[1]));
 		else
@@ -46,7 +51,6 @@ void check_comment(int len, char *str, char *line, t_asm *champ)
 	int len2;
 	int i;
 	char **tab;
-
 	len2 = len - ft_strlen(str);
 	i = 7;
 	while (str[i] != '"' && i < ft_strlen(str))
@@ -65,6 +69,11 @@ void check_comment(int len, char *str, char *line, t_asm *champ)
 		exit(-1);
 	}
 	tab = ft_strsplit(line, '"');
+	if (tab[1] == NULL)
+	{
+		// champ->header->comment = NULL;
+		return ;
+	}
 	if (ft_strlen(tab[1]) <= COMMENT_LENGTH)
 		ft_memcpy(champ->header->comment, tab[1], ft_strlen(tab[1]));
 	else

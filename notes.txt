@@ -4,7 +4,7 @@ else if (ft_strchr(LABEL_CHARS, line[i]))
 	j = 0;
 	ret = NULL;
 	ret = ft_strsub(line, flag, i - flag);
-	printf("\tRET 2 [%s]\n", ret);
+	//printf("\tRET 2 [%s]\n", ret);
 	while ( j < 16)
 	{
 		if (ft_strcmp(ret, g_op[j].name) == 0)

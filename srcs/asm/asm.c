@@ -6,7 +6,7 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 12:30:34 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/08 16:11:26 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/11 17:17:34 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 	i = 0;
 	while (size)
 	{
-		printf("[%d]\n", data[pos + size - 1]);
+		//printf("[%d]\n", data[pos + size - 1]);
 		data[pos + size - 1] = (uint8_t)((value >> i) & 0xFF);
 		i += 8;
 		size--;

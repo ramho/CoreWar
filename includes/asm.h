@@ -95,12 +95,17 @@ char *str_to_char(char *str, char c);
 */
 int parse_op(char *ret, char *line, int i, int op, t_asm *champ, int column);
 void check_op(char *name, char *line, int size_op, t_asm *champ, int column);
+void	calc_new_pos(t_token *token, t_asm *champ);
 
 /*
 ** parse_param.c
 */
 void parse_param(int op, char **tab, t_asm *champ);
 int check_param(char *param, t_asm *champ, int param_i);
+
+/*
+** parse_param_utils.c
+*/
 int check_dir(char *param, int param_i, t_asm *champ);
 int check_ind(char *param, int param_i, t_asm *champ);
 int check_reg(char *param, int param_i, t_asm *champ);
@@ -129,9 +134,8 @@ t_label *init_label_link(t_label *new, t_label *head);
 void init_asm(t_asm *champ);
 void init_label_struct(t_asm *champ);
 void init_token_struct(t_asm *champ);
-/*
-**
-*/
+
+
 
 /*
 **

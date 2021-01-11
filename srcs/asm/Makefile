@@ -6,7 +6,7 @@
 #    By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/24 14:36:19 by rhoorntj          #+#    #+#              #
-#    Updated: 2021/01/08 17:37:19 by rhoorntj         ###   ########.fr        #
+#    Updated: 2021/01/11 13:26:13 by rhoorntj         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME	= asm
 
 SRC		=	asm.c free_error.c parse_tokens.c valid_file.c parse_header.c \
 			parse_op.c parse_param.c parse_label.c op_chained_list.c \
-			label_chained_list.c init.c
+			label_chained_list.c init.c parse_param_utils.c \
 
 OBJ		= $(SRC:.c=.o)
 LIB		= -L../../libft -lft

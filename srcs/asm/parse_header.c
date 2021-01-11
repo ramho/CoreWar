@@ -6,7 +6,7 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 18:04:17 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/06 17:50:19 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/11 16:41:18 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 void get_name_comment(char *line, t_asm *champ, int len)
 {
-	// printf("in get name comm [%s]\n", line);
+	//printf("in get name comm [%s]\n", line);
 	char *str;
 	char **tab;
-
 
 	if ((str = ft_strstr(line, "name")))
 	{

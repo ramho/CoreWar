@@ -38,6 +38,6 @@ int valid_file(t_asm *champ, char *file_name)
 // 	fd = open(file_name, O_RDONLY, 0);
 // 	while ((get_next_line(fd, &line )) > 0)
 // 	{
-// 		printf("line = %s\n", line);
+// 		//printf("line = %s\n", line);
 // 	}
 // }

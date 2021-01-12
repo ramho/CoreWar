@@ -21,6 +21,9 @@ struct	s_asm
 	int pos; //  number of bytes
 	char *line;
 	char *file_name;
+
+	char *program;
+	char *code;
 	// char **file;
 	struct header_s *header;
 	struct	s_label *head;
@@ -30,7 +33,7 @@ struct	s_asm
 
 struct s_token
 {
-	int pos; // [*] position in byte to use if label
+	uint32_t pos; // [*] position in byte to use if label
 	int op_code; // [*] opcode value to find in t_op
 	int8_t	encoded_byte; // [ ] size of 1 byte only if t_op->args_type_code true
 	char *label; // [*] name of label so can find it in label chained list
@@ -65,85 +68,88 @@ int	main(int ac, char **av);
 t_asm *check_arg(int ac, t_asm *champ);
 
 /*
-** valid_file.c
+** file.c
 */
-int valid_file(t_asm *champ, char *file_name);
+int		valid_file(t_asm *champ, char *file_name);
+void	get_file(char *file, t_asm *champ);
+int		create_cor_file(t_asm *champ);
 
 /*
 ** parse_tokens.c
 */
-void get_file(char *file, t_asm *champ);
-void parse_token(char *line, t_asm *champ);
+void	parse_token(char *line, t_asm *champ);
 
 /*
 ** free_error.c
 */
-void invalid_header(t_asm *champ, int error);
-void file_error(t_asm *champ, char *file_name, int error);
-void malloc_error(t_asm *champ, char *file);
-void free_chained_label(t_asm *champ);
+void	invalid_header(t_asm *champ, int error);
+void	file_error(t_asm *champ, char *file_name, int error);
+void	malloc_error(t_asm *champ, char *file);
+void	free_chained_label(t_asm *champ);
 
 /*
 ** parse_header.c
 */
-void get_name_comment(char *line, t_asm *champ, int len);
-void check_comment(int len, char *str, char *line, t_asm *champ);
-char *str_to_char(char *str, char c);
+void	get_name_comment(char *line, t_asm *champ, int len);
+void	check_comment(int len, char *str, char *line, t_asm *champ);
+char	*str_to_char(char *str, char c);
 
 /*
 ** parse_op.c
 */
-int parse_op(char *ret, char *line, int i, int op, t_asm *champ, int column);
-void check_op(char *name, char *line, int size_op, t_asm *champ, int column);
+int		parse_op(char *ret, char *line, int i, int op, t_asm *champ, int column);
+void	check_op(char *name, char *line, int size_op, t_asm *champ, int column);
 void	calc_new_pos(t_token *token, t_asm *champ);
 
 /*
 ** parse_param.c
 */
-void parse_param(int op, char **tab, t_asm *champ);
-int check_param(char *param, t_asm *champ, int param_i);
+void	parse_param(int op, char **tab, t_asm *champ);
+int		check_param(char *param, t_asm *champ, int param_i);
 
 /*
 ** parse_param_utils.c
 */
-int check_dir(char *param, int param_i, t_asm *champ);
-int check_ind(char *param, int param_i, t_asm *champ);
-int check_reg(char *param, int param_i, t_asm *champ);
+int		check_dir(char *param, int param_i, t_asm *champ);
+int		check_ind(char *param, int param_i, t_asm *champ);
+int		check_reg(char *param, int param_i, t_asm *champ);
 
 /*
 ** parse_label.c
 */
-void check_label_error(char *line, int index, int row);
-int parse_label(char *line, int i, int row, t_asm *champ);
+void	check_label_error(char *line, int index, int row);
+int		parse_label(char *line, int i, int row, t_asm *champ);
 
 /*
 ** op_chained_list.c
 */
-void add_op_link(t_token *new, t_asm *champ);
-t_token *init_op_link(t_token *new, t_token *first);
+void	add_op_link(t_token *new, t_asm *champ);
+t_token	*init_op_link(t_token *new, t_token *first);
 
 /*
 ** label_chained_list.c
 */
-void add_label_link(t_label *new, t_asm *champ);
-t_label *init_label_link(t_label *new, t_label *head);
+void 	add_label_link(t_label *new, t_asm *champ);
+t_label	*init_label_link(t_label *new, t_label *head);
 
 /*
 ** init.c
 */
-void init_asm(t_asm *champ);
-void init_label_struct(t_asm *champ);
-void init_token_struct(t_asm *champ);
+void	init_asm(t_asm *champ);
+void	init_label_struct(t_asm *champ);
+void	init_token_struct(t_asm *champ);
 
 
 
 /*
-**
+** encode.c
 */
+void	encode(t_asm *champ, int fd);
 
 /*
-**
+** transfer_to_str.c
 */
+void	transfer_cmd_to_str(t_asm *champ, int fd);
 
 typedef enum
 {

@@ -6,7 +6,7 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 16:04:14 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/08 18:36:00 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/12 16:04:33 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	init_asm(t_asm *champ)
 	champ->row = 0;
 	champ->pos = 0;
 	champ->file_name = NULL;
+	champ->program = NULL;
 	init_label_struct(champ);
 	init_token_struct(champ);
 }

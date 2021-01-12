@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   valid_file.c                                       :+:      :+:    :+:   */
+/*   file.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhoorntj <rhoorntj@student.s19.be>         +#+  +:+       +#+        */
+/*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 12:30:57 by rhoorntj          #+#    #+#             */
-/*   Updated: 2020/12/16 16:25:16 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/12 17:36:27 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,12 @@ int valid_file(t_asm *champ, char *file_name)
 	return (0);
 }
 
-// void open_file(char *file_name)
-// {
-// 	int fd;
-// 	char *line;
-//
-// 	line = NULL;
-// 	fd = open(file_name, O_RDONLY, 0);
-// 	while ((get_next_line(fd, &line )) > 0)
-// 	{
-// 		//printf("line = %s\n", line);
-// 	}
-// }
+int create_cor_file(t_asm *champ)
+{
+	int fd;
+
+	ft_strcat(champ->file_name, ".cor");
+	if ((fd = open(champ->file_name, O_WRONLY | O_CREAT, 0644)) == -1)
+		printf("Error: FD [%d]\n", fd); // add in error
+	return (fd);
+}

@@ -6,27 +6,11 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 12:30:34 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/11 18:47:42 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/12 18:12:25 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/asm.h"
-
-//check for the entension '.s'
-
-/*void	int32_to_bytecode(char *data, int32_t pos, int32_t value, size_t size)
-{
-	int8_t		i;
-
-	i = 0;
-	while (size)
-	{
-		//printf("[%d]\n", data[pos + size - 1]);
-		data[pos + size - 1] = (uint8_t)((value >> i) & 0xFF);
-		i += 8;
-		size--;
-	}
-}*/
 
 t_asm *check_arg(int ac, t_asm *champ)
 {
@@ -44,7 +28,7 @@ int	main(int ac, char **av)
 {
 	t_asm *champ;
 	// char *line;
-	// int fd;
+	int fd;
 
  	champ = NULL;
 	if (!(champ = check_arg(ac, champ)))
@@ -52,8 +36,11 @@ int	main(int ac, char **av)
 	init_asm(champ);
 	if (valid_file(champ,  av[ac - 1]))
 		get_file(av[ac - 1], champ);
-
-		// FOR DEBUGING ONLY
+	fd = create_cor_file(champ); // should go after
+	transfer_cmd_to_str(champ, fd);
+	// fd = create_cor_file(champ);
+	// encode(champ, fd);
+	// FOR DEBUGING ONLY
 		t_label *index;
 			index = champ->head;
 			while (index)
@@ -69,6 +56,6 @@ int	main(int ac, char **av)
 			printf("\tline [%s] name [%s] label [%s]\n", index2->line, g_op[index2->op_code].name, index2->label);
 			index2 = index2->next;
 		}
-		// END
+	// END
 	return (0);
 }

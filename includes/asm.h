@@ -145,6 +145,7 @@ void	init_token_struct(t_asm *champ);
 ** encode.c
 */
 void	encode(t_asm *champ, int fd);
+void	int32_to_bytecode(char *data, int32_t pos, int32_t value, size_t size);
 
 /*
 ** transfer_to_str.c

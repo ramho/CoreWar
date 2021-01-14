@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rhoorntj <rhoorntj@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 12:30:34 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/12 18:12:25 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/14 12:30:11 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,21 @@ int	main(int ac, char **av)
 	// fd = create_cor_file(champ);
 	// encode(champ, fd);
 	// FOR DEBUGING ONLY
-		t_label *index;
-			index = champ->head;
-			while (index)
-			{
-				printf("name [%s] post[%d]\n", index->name, index->pos);
-				index = index->next;
-			}
-
-		t_token *index2;
-		index2 = champ->first;
-		while (index2)
-		{
-			printf("\tline [%s] name [%s] label [%s]\n", index2->line, g_op[index2->op_code].name, index2->label);
-			index2 = index2->next;
-		}
+		// t_label *index;
+		// 	index = champ->head;
+		// 	while (index)
+		// 	{
+		// 		printf("name [%s] post[%d]\n", index->name, index->pos);
+		// 		index = index->next;
+		// 	}
+		//
+		// t_token *index2;
+		// index2 = champ->first;
+		// while (index2)
+		// {
+		// 	printf("\tline [%s] name [%s] label [%s]\n", index2->line, g_op[index2->op_code].name, index2->label);
+		// 	index2 = index2->next;
+		// }
 	// END
 	return (0);
 }

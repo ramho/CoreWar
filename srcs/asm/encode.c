@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   encode.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rhoorntj <rhoorntj@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 12:56:17 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/12 17:31:14 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/14 13:02:47 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ void	int32_to_bytecode(char *data, int32_t pos, int32_t value, size_t size)
 		size--;
 	}
 }
-
-
 
 void encode(t_asm *champ, int fd)
 {
@@ -50,3 +48,26 @@ void encode(t_asm *champ, int fd)
 	write(fd, champ->program, (size_t)len);
 	free(encoding);
 }
+
+
+uint8_t	code_encoded_byte(t_token *token, int op)
+{
+	printf("in CODE_ENCODED_BYE\n");
+	uint8_t byte;
+	int i;
+
+	i = 0;
+	byte = 0;
+	while (i < g_op[op].args_num)
+	{
+		byte |= token->param_type[i] << 2 * (4 - i - 1);
+		i++;
+	}
+	printf("byte = [%d]\n", byte);
+	return (byte);
+}
+
+// uint8_t			add_param_value(int8_t param_type, int arg_num)
+// {
+// 	return(token->param_type[i] << 2 * (4 - i - 1));
+// }

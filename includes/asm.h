@@ -146,11 +146,14 @@ void	init_token_struct(t_asm *champ);
 */
 void	encode(t_asm *champ, int fd);
 void	int32_to_bytecode(char *data, int32_t pos, int32_t value, size_t size);
+uint8_t	code_encoded_byte(t_token *token, int op);
 
 /*
 ** transfer_to_str.c
 */
 void	transfer_cmd_to_str(t_asm *champ, int fd);
+static int32_t	ft_llongmax(unsigned long long int nb, int sign);// a voir si je garde, testing
+int32_t			ft_atoi32(const char *str); // a voir si je garde, testing
 
 typedef enum
 {

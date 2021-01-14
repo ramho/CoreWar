@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_param_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rhoorntj <rhoorntj@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 13:25:03 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/11 17:17:02 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/14 12:57:57 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int check_dir(char *param, int param_i, t_asm *champ)
 		while (ft_strchr(LABEL_CHARS, param[i]) && param[i])
 			i++;
 			champ->new_token->param[param_i] = param + 1;
-			champ->new_token->param_type[param_i] = T_DIR;
+			champ->new_token->param_type[param_i] = DIR_CODE;
 			// //printf("\tDIR param [%d] [%s][%d]\n", param_i, champ->new_token->param[param_i],champ->new_token->param_type[param_i]);
 			return (1);
 	}
@@ -34,7 +34,7 @@ int check_dir(char *param, int param_i, t_asm *champ)
 		if (i >= INT_MIN && i <= INT_MAX)
 		{
 			champ->new_token->param[param_i] = param;
-			champ->new_token->param_type[param_i] = T_DIR;
+			champ->new_token->param_type[param_i] = DIR_CODE;
 			// //printf("\tDIR param [%d] [%s][%d]\n", param_i, champ->new_token->param[param_i],champ->new_token->param_type[param_i]);
 			return (1);
 		}
@@ -57,7 +57,7 @@ int check_ind(char *param, int param_i, t_asm *champ)
 		if (i == ft_strlen(param))
 		{
 			champ->new_token->param[param_i] = param + 1;
-			champ->new_token->param_type[param_i] = T_IND;
+			champ->new_token->param_type[param_i] = IND_CODE;
 			//printf("\tIND param [%d] [%s][%d]\n", param_i, champ->new_token->param[param_i],champ->new_token->param_type[param_i]);
 			return (1);
 		}
@@ -68,7 +68,7 @@ int check_ind(char *param, int param_i, t_asm *champ)
 		if (i >= INT_MIN && i <= INT_MAX)
 		{
 			champ->new_token->param[param_i] = param;
-			champ->new_token->param_type[param_i] = T_IND;
+			champ->new_token->param_type[param_i] = IND_CODE;
 			//printf("\tIND param [%d] [%s][%d]\n", param_i, champ->new_token->param[param_i],champ->new_token->param_type[param_i]);
 			return (1);
 		}
@@ -85,7 +85,7 @@ int check_reg(char *param, int param_i, t_asm *champ)
 	if (check >= 1 && check <= 16)
 	{
 		champ->new_token->param[param_i] = param;
-		champ->new_token->param_type[param_i] = T_REG;
+		champ->new_token->param_type[param_i] = REG_CODE;
 		// //printf("\tREG param [%d] [%s][%d]\n", param_i, champ->new_token->param[param_i],champ->new_token->param_type[param_i]);
 		return (1);
 	}

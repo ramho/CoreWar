@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transfer_to_str.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhoorntj <rhoorntj@student.s19.be>         +#+  +:+       +#+        */
+/*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 16:00:12 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/14 12:59:41 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/14 17:22:56 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@ void	transfer_cmd_to_str(t_asm *champ, int fd)
 	char *code;
 	int i;
 
+	int fd1;
+	fd1 = open("debug", O_WRONLY | O_CREAT, 0644);
+
 	code = ft_strnew(champ->pos);
 	index = champ->first;
 	i = 0;
@@ -27,13 +30,13 @@ void	transfer_cmd_to_str(t_asm *champ, int fd)
 		i += 1;
 		if (g_op[index->op_code].args_types_code == true)
 		{
-			printf("here\n");
 			code[i] = code_encoded_byte(index, index->op_code);
 			i += 1;
 		}
-		// code_params();
+		i = code_params(code + i, index);
 		index = index->next;
 	}
+	// write(fd1, &code, i + 1);
 	write(fd, code, champ->pos);
 
 }

@@ -38,7 +38,7 @@ struct s_token
 	int8_t	encoded_byte; // [ ] size of 1 byte only if t_op->args_type_code true
 	char *label; // [*] name of label so can find it in label chained list
 	char *param[3]; // [ ] poir sauvegarder les valeur
-	int param_type[3]; // type of param
+	int8_t param_type[3]; // type of param
 	char *line; // [*]so can check index of error label later on using strstri
 	int column; // [*] have index for error mgmt // can keep in in asm
 	struct s_token *next;
@@ -147,6 +147,7 @@ void	init_token_struct(t_asm *champ);
 void	encode(t_asm *champ, int fd);
 void	int32_to_bytecode(char *data, int32_t pos, int32_t value, size_t size);
 uint8_t	code_encoded_byte(t_token *token, int op);
+int code_param(char *code, t_token *token);
 
 /*
 ** transfer_to_str.c

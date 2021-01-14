@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhoorntj <rhoorntj@student.s19.be>         +#+  +:+       +#+        */
+/*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 12:30:34 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/14 12:30:11 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/14 16:51:29 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,16 @@ int	main(int ac, char **av)
 		// 	}
 		//
 		// t_token *index2;
+		// int la = 0;
 		// index2 = champ->first;
 		// while (index2)
 		// {
-		// 	printf("\tline [%s] name [%s] label [%s]\n", index2->line, g_op[index2->op_code].name, index2->label);
+		// 	printf("\tline [%s] name [%s] label [%s] \n", index2->line, g_op[index2->op_code].name, index2->label);
+		// 	while (la < g_op[index2->op_code].args_num)
+		// 	{
+		// 		printf("\tparam [%s] param_type [%d]\n", index2->param[la], index2->param_type[la]);
+		// 		la++;
+		// 	}
 		// 	index2 = index2->next;
 		// }
 	// END

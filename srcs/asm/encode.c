@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   encode.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhoorntj <rhoorntj@student.s19.be>         +#+  +:+       +#+        */
+/*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 12:56:17 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/14 13:02:47 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/14 17:23:08 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void encode(t_asm *champ, int fd)
 
 uint8_t	code_encoded_byte(t_token *token, int op)
 {
-	printf("in CODE_ENCODED_BYE\n");
+	printf("in CODE_ENCODED_BYTE\n");
 	uint8_t byte;
 	int i;
 
@@ -63,11 +63,10 @@ uint8_t	code_encoded_byte(t_token *token, int op)
 		byte |= token->param_type[i] << 2 * (4 - i - 1);
 		i++;
 	}
-	printf("byte = [%d]\n", byte);
 	return (byte);
 }
 
-// uint8_t			add_param_value(int8_t param_type, int arg_num)
-// {
-// 	return(token->param_type[i] << 2 * (4 - i - 1));
-// }
+int code_param(char *code, t_token *token)
+{
+
+}

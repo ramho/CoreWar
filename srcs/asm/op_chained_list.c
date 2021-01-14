@@ -6,7 +6,7 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 18:48:52 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/11 17:18:44 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/14 16:48:53 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ t_token *init_op_link(t_token *new, t_token *first)
 			ft_printf("strdup 3 [i] errror in init_op_link\n", i );
 			exit(0);
 		}
+		first->param_type[i] = new->param_type[i];
 	}
 	//printf("4\n");
 	return(first);

@@ -6,7 +6,7 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 16:00:12 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/16 14:39:49 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/16 16:20:35 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	transfer_cmd_to_str(t_asm *champ, int fd)
 			code[pos] = code_encoded_byte(index, index->op_code);
 			pos += 1;
 		}
-		pos = code_params(code, pos, index);
+		pos = code_params(code, pos, index,champ);
 		index = index->next;
 	}
 	encode(champ, fd, code);

@@ -6,7 +6,7 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 12:30:34 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/14 16:51:29 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/16 16:16:21 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	main(int ac, char **av)
 	transfer_cmd_to_str(champ, fd);
 	// fd = create_cor_file(champ);
 	// encode(champ, fd);
+	
 	// FOR DEBUGING ONLY
 		// t_label *index;
 		// 	index = champ->head;

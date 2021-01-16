@@ -26,8 +26,8 @@ struct	s_asm
 	char *code;
 	// char **file;
 	struct header_s *header;
-	struct	s_label *head;
-	struct s_token *first;
+	struct	s_label *head; // list of labels
+	struct s_token *first; // list of tokens
 	struct s_token *new_token;
 };
 
@@ -158,10 +158,11 @@ void	transfer_cmd_to_str(t_asm *champ, int fd);
 /*
 ** param_coding.c
 */
-int		code_params(char *code, int pos, t_token *token);
+int		code_params(char *code, int pos, t_token *token, t_asm *champ);
 // void add_reg(char *code, char *param);
 // void	add_dir_ind(char *code, char *param, t_token *token, int i, int pos);
-int		add_dir_ind(char *code, char *param, t_token *token, int i, int pos);
+int		add_dir_ind(char *code, char *param, t_token *token, int i, int pos, t_asm *champ);
+int get_label_value(t_asm *champ, t_token *token, char *param);
 
 
 typedef enum

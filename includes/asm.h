@@ -36,7 +36,7 @@ struct s_token
 	uint32_t pos; // [*] position in byte to use if label
 	int op_code; // [*] opcode value to find in t_op
 	int8_t	encoded_byte; // [ ] size of 1 byte only if t_op->args_type_code true
-	char *label; // [*] name of label so can find it in label chained list
+	char *label; // [*] name of label so can find it in label chained list // not useful
 	char *param[3]; // [ ] poir sauvegarder les valeur
 	int8_t param_type[3]; // type of param
 	char *line; // [*]so can check index of error label later on using strstri
@@ -144,17 +144,25 @@ void	init_token_struct(t_asm *champ);
 /*
 ** encode.c
 */
-void	encode(t_asm *champ, int fd);
+void	encode(t_asm *champ, int fd, char * code);
 void	int32_to_bytecode(char *data, int32_t pos, int32_t value, size_t size);
 uint8_t	code_encoded_byte(t_token *token, int op);
-int code_param(char *code, t_token *token);
 
 /*
 ** transfer_to_str.c
 */
 void	transfer_cmd_to_str(t_asm *champ, int fd);
-static int32_t	ft_llongmax(unsigned long long int nb, int sign);// a voir si je garde, testing
-int32_t			ft_atoi32(const char *str); // a voir si je garde, testing
+// static int32_t	ft_llongmax(unsigned long long int nb, int sign);// a voir si je garde, testing
+// int32_t			ft_atoi32(const char *str); // a voir si je garde, testing
+
+/*
+** param_coding.c
+*/
+int		code_params(char *code, int pos, t_token *token);
+// void add_reg(char *code, char *param);
+// void	add_dir_ind(char *code, char *param, t_token *token, int i, int pos);
+int		add_dir_ind(char *code, char *param, t_token *token, int i, int pos);
+
 
 typedef enum
 {

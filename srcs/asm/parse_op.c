@@ -6,7 +6,7 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 14:19:25 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/11 18:42:41 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/17 14:15:59 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,17 @@ void check_op(char *name, char *line, int size_op, t_asm *champ, int column)
 	champ->new_token->pos =	champ->pos;
 	champ->new_token->line = ft_strdup(line);
 	champ->new_token->column = column;
-	// //printf("line [%s] i [%d]\n",champ->new_token->line, champ->new_token->column );
  	parse_param(op, tab, champ);
 
  	return (1);
  }
 
+/*
+** Byte starts at 1 for the op name.
+*/
 void	calc_new_pos(t_token *token, t_asm *champ)
 {
+	printf("in CALC_NEW_POS name [%s]\n", g_op[token->op_code].name);
 	int byte;
 	int i;
 
@@ -87,24 +90,23 @@ void	calc_new_pos(t_token *token, t_asm *champ)
 		byte += 1;
 	while (i < g_op[token->op_code].args_num)
 	{
-		if (token->param_type[i] == T_REG)
+		if (token->param_type[i] == REG_CODE)
 		{
 			byte += 1;
-			// //printf("\tREG  byte = [%d]\n", byte);
+			// printf("\tREG\n");
 		}
-		else if (token->param_type[i] == T_IND)
+		else if (token->param_type[i] == IND_CODE)
 		{
 			byte += 2;
-			// //printf("\tIND byte = [%d]\n", byte);
+			// printf("\tIND\n");
 		}
-		else if (token->param_type[i] == T_DIR)
+		else if (token->param_type[i] == DIR_CODE)
 		{
 			byte += g_op[token->op_code].t_dir_size;
-			// //printf("\tDIR size [%d]\n", g_op[token->op_code].t_dir_size);
-			// //printf("\tDIR byte = [%d]\n", byte);
+			// printf("\tDIR\n");
 		}
 		i++;
 	}
 	champ->pos += byte;
-	// //printf("*** size = [%d]\n", champ->pos);
+	// printf("*** size = [%d] op size [%d]\n", champ->pos, byte);
 }

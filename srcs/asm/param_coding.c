@@ -6,19 +6,19 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 13:25:24 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/16 16:37:00 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/17 14:25:20 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+// [1] No such label li while attempting to dereference token [TOKEN][004:019] DIRECT_LABEL "%:li"
+
 #include "../../includes/asm.h"
 
-int code_params(char *code, int pos, t_token *token, t_asm *champ)
+int	code_params(char *code, int pos, t_token *token, t_asm *champ)
 {
-	int i;
-	// int8_t pos;
+	int	i;
 
 	i = 0;
-	// pos = 0;
 
 	while ( i < g_op[token->op_code].args_num)
 	{
@@ -37,11 +37,11 @@ int code_params(char *code, int pos, t_token *token, t_asm *champ)
 	return (pos);
 }
 
-int add_dir_ind(char *code, char *param, t_token *token, int i, int pos, t_asm *champ)
+int	add_dir_ind(char *code, char *param, t_token *token, int i, int pos, t_asm *champ)
 {
 	printf("in ADD ind or dir [%s]\n", param);
-	int32_t size;
-	int32_t value;
+	int32_t	size;
+	int32_t	value;
 
 	if (token->param_type[i] == DIR_CODE)
 		size = g_op[token->op_code].t_dir_size;
@@ -50,34 +50,39 @@ int add_dir_ind(char *code, char *param, t_token *token, int i, int pos, t_asm *
 
 	if (ft_isalpha(param[0])) // label
 	{
-		// printf("\tis label\n");
+		//check if label exist otherwise error, [1]
 		value = get_label_value(champ, token, param);
-		printf("  label pos/value [%d]\n", value);
+		printf("hello\n");
 		int32_to_bytecode(code, pos, value , size);
 
 	}
 	else // int
 	{
 		int32_to_bytecode(code, pos, ft_atoi(param), size);
-		// printf("\tis int\n");
 	}
 	return (size);
 }
 
+// ERROR TO ADD -> No such label louuip while attempting to dereference token [TOKEN][005:004] INDIRECT_LABEL ":louuip"
+
 int	get_label_value(t_asm *champ, t_token *token, char *param)
 {
-	t_label *index;
+	printf("in GET_LABEL_VALUE param [%s]\n", param);
+	t_label	*index;
 
+if ( champ->head->name)
+{
 	index = champ->head;
 	while (index)
 	{
-		printf("if strcmp [%s] - [%s]\n", param, index->name);
 		if (!ft_strcmp(param, index->name))
 		{
-			printf(" [%d] - [%d] = [%d]\n", index->pos, token->pos, index->pos - token->pos);
 			return (index->pos - token->pos);;
 		}
 		index = index->next;
 	}
-	return (-1);
+}
+	// printf("ERROR label no have\n");
+	ft_printf("No such label %s while attempting to dereference token [TOKEN][%03d:%03d]\n", param, 0, 0);
+	exit (0);
 }

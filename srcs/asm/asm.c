@@ -6,7 +6,7 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 12:30:34 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/16 16:16:21 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/17 14:14:19 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(int ac, char **av)
 	transfer_cmd_to_str(champ, fd);
 	// fd = create_cor_file(champ);
 	// encode(champ, fd);
-	
+
 	// FOR DEBUGING ONLY
 		// t_label *index;
 		// 	index = champ->head;
@@ -51,11 +51,12 @@ int	main(int ac, char **av)
 		// 	}
 		//
 		// t_token *index2;
-		// int la = 0;
+		// int la;
 		// index2 = champ->first;
 		// while (index2)
 		// {
-		// 	printf("\tline [%s] name [%s] label [%s] \n", index2->line, g_op[index2->op_code].name, index2->label);
+		// 	printf("line [%s] name [%s] label [%s] \n", index2->line, g_op[index2->op_code].name, index2->label);
+		// 	la = 0;
 		// 	while (la < g_op[index2->op_code].args_num)
 		// 	{
 		// 		printf("\tparam [%s] param_type [%d]\n", index2->param[la], index2->param_type[la]);

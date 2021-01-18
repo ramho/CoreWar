@@ -71,7 +71,7 @@ t_asm *check_arg(int ac, t_asm *champ);
 ** file.c
 */
 int		valid_file(t_asm *champ, char *file_name);
-void	get_file(char *file, t_asm *champ);
+void	get_file(char *file, t_asm *champ, int fd);
 int		create_cor_file(t_asm *champ);
 
 /*
@@ -151,7 +151,7 @@ uint8_t	code_encoded_byte(t_token *token, int op);
 /*
 ** transfer_to_str.c
 */
-void	transfer_cmd_to_str(t_asm *champ, int fd);
+char 	*transfer_cmd_to_str(t_asm *champ, int fd);
 // static int32_t	ft_llongmax(unsigned long long int nb, int sign);// a voir si je garde, testing
 // int32_t			ft_atoi32(const char *str); // a voir si je garde, testing
 
@@ -162,7 +162,7 @@ int		code_params(char *code, int pos, t_token *token, t_asm *champ);
 // void add_reg(char *code, char *param);
 // void	add_dir_ind(char *code, char *param, t_token *token, int i, int pos);
 int		add_dir_ind(char *code, char *param, t_token *token, int i, int pos, t_asm *champ);
-int get_label_value(t_asm *champ, t_token *token, char *param);
+int 	get_label_value(t_asm *champ, t_token *token, char *param);
 
 
 typedef enum

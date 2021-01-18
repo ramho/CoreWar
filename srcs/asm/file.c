@@ -6,17 +6,15 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 12:30:57 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/12 17:36:27 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/18 16:18:40 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/asm.h"
 
-// if no file " Can't read source file %s"
-
-int valid_file(t_asm *champ, char *file_name)
+int		valid_file(t_asm *champ, char *file_name)
 {
-	int len;
+	int	len;
 
 	len = ft_strlen(file_name);
 	if (file_name[len - 2] == '.' && file_name[len - 1] == 's')
@@ -29,9 +27,40 @@ int valid_file(t_asm *champ, char *file_name)
 	return (0);
 }
 
-int create_cor_file(t_asm *champ)
+/*
+**	l64:	check if there is a comment in the line. If so, save the line up to
+**			comment char.
+*/
+
+void	get_file(char *file, t_asm *champ, int fd)
 {
-	int fd;
+	int		start;
+	char	*line;
+	char	*buf;
+
+	champ->row = 1;
+	if ((fd = open(file, O_RDONLY)) <= 0)
+		file_error(champ, file, 2);
+	if (!(champ->header = ft_memalloc(sizeof(header_t))))
+		file_error(champ, file, 3);
+	while ((get_next_line(fd, &line) > 0))
+	{
+		start = ft_pos_i(line, '#');
+		line = ft_strsub(line, 0, start); // malloc free to check
+		if ((buf = ft_strchr(line, '.')))
+			get_name_comment(buf, champ, ft_strlen(line));
+		else
+		{
+			parse_token(line, champ);
+		}
+		free(line);
+		champ->row++;
+	}
+}
+
+int		create_cor_file(t_asm *champ)
+{
+	int	fd;
 
 	ft_strcat(champ->file_name, ".cor");
 	if ((fd = open(champ->file_name, O_WRONLY | O_CREAT, 0644)) == -1)

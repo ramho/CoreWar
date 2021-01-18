@@ -41,6 +41,30 @@ int32_t			ft_atoi32(const char *str)
 }
 
 
+// FOR DEBUGING ONLY
+	// t_label *index;
+	// 	index = champ->head;
+	// 	while (index)
+	// 	{
+	// 		printf("name [%s] post[%d]\n", index->name, index->pos);
+	// 		index = index->next;
+	// 	}
+	//
+	// t_token *index2;
+	// int la;
+	// index2 = champ->first;
+	// while (index2)
+	// {
+	// 	printf("line [%s] name [%s] label [%s] \n", index2->line, g_op[index2->op_code].name, index2->label);
+	// 	la = 0;
+	// 	while (la < g_op[index2->op_code].args_num)
+	// 	{
+	// 		printf("\tparam [%s] param_type [%d]\n", index2->param[la], index2->param_type[la]);
+	// 		la++;
+	// 	}
+	// 	index2 = index2->next;
+	// }
+// END
 
 _.--.__.-'""`-.__.--.__.-'""`-.__.--.__.-'""`-.__.--.__.-'""`-._
                               ERROR

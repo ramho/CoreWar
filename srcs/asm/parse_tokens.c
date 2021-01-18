@@ -6,7 +6,7 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 12:30:49 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/17 13:57:19 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/18 14:12:31 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,36 +18,36 @@
 
 // Invalid parameter [2(0-2)] type [register] for instruction [ld]
 
-void get_file(char *file, t_asm *champ)
-{
-	int fd;
-	int start;
-	char *line;
-	char *buf;
-
-	champ->row = 1;
-	if ((fd = open(file, O_RDONLY)) <= 0)
-		file_error(champ, file, 2);
-	if (!(champ->header = ft_memalloc(sizeof(header_t))))
-	{
-		free(champ);
-		exit(-1);
-	}
-	while ((get_next_line(fd, &line) > 0))
-	{
-		//check if comment before title like in car.s
-		start = ft_pos_i(line, '#');
-		line = ft_strsub(line, 0, start); // malloc free to check
-		if ((buf = ft_strchr(line, '.')))
-			get_name_comment(buf, champ, ft_strlen(line));
-		else
-		{
-			parse_token(line, champ);
-		}
-		free(line);
-		champ->row++;
-	}
-}
+// void get_file(char *file, t_asm *champ)
+// {
+// 	int fd;
+// 	int start;
+// 	char *line;
+// 	char *buf;
+//
+// 	champ->row = 1;
+// 	if ((fd = open(file, O_RDONLY)) <= 0)
+// 		file_error(champ, file, 2);
+// 	if (!(champ->header = ft_memalloc(sizeof(header_t))))
+// 	{
+// 		free(champ);
+// 		exit(-1);
+// 	}
+// 	while ((get_next_line(fd, &line) > 0))
+// 	{
+// 		//check if comment before title like in car.s
+// 		start = ft_pos_i(line, '#');
+// 		line = ft_strsub(line, 0, start); // malloc free to check
+// 		if ((buf = ft_strchr(line, '.')))
+// 			get_name_comment(buf, champ, ft_strlen(line));
+// 		else
+// 		{
+// 			parse_token(line, champ);
+// 		}
+// 		free(line);
+// 		champ->row++;
+// 	}
+// }
 
 void parse_token(char *line, t_asm *champ)
 {

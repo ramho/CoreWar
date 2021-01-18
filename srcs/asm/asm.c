@@ -6,13 +6,13 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 12:30:34 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/17 14:14:19 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/18 15:41:09 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/asm.h"
 
-t_asm *check_arg(int ac, t_asm *champ)
+t_asm	*check_arg(int ac, t_asm *champ)
 {
 	if (ac < 2)
 	{
@@ -24,46 +24,21 @@ t_asm *check_arg(int ac, t_asm *champ)
 	return (champ);
 }
 
-int	main(int ac, char **av)
+int		main(int ac, char **av)
 {
-	t_asm *champ;
-	// char *line;
-	int fd;
+	int		fd;
+	char	*code;
+	t_asm	*champ;
 
- 	champ = NULL;
+	fd = 0;
+	champ = NULL;
 	if (!(champ = check_arg(ac, champ)))
 		return (-1);
 	init_asm(champ);
-	if (valid_file(champ,  av[ac - 1]))
-		get_file(av[ac - 1], champ);
-	fd = create_cor_file(champ); // should go after
-	transfer_cmd_to_str(champ, fd);
-	// fd = create_cor_file(champ);
-	// encode(champ, fd);
-
-	// FOR DEBUGING ONLY
-		// t_label *index;
-		// 	index = champ->head;
-		// 	while (index)
-		// 	{
-		// 		printf("name [%s] post[%d]\n", index->name, index->pos);
-		// 		index = index->next;
-		// 	}
-		//
-		// t_token *index2;
-		// int la;
-		// index2 = champ->first;
-		// while (index2)
-		// {
-		// 	printf("line [%s] name [%s] label [%s] \n", index2->line, g_op[index2->op_code].name, index2->label);
-		// 	la = 0;
-		// 	while (la < g_op[index2->op_code].args_num)
-		// 	{
-		// 		printf("\tparam [%s] param_type [%d]\n", index2->param[la], index2->param_type[la]);
-		// 		la++;
-		// 	}
-		// 	index2 = index2->next;
-		// }
-	// END
+	if (valid_file(champ, av[ac - 1]))
+		get_file(av[ac - 1], champ, fd);
+	code = transfer_cmd_to_str(champ, fd);
+	fd = create_cor_file(champ);
+	encode(champ, fd, code);
 	return (0);
 }

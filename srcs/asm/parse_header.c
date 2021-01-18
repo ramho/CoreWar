@@ -6,7 +6,7 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 18:04:17 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/11 18:39:13 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/18 16:30:23 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,13 @@ void get_name_comment(char *line, t_asm *champ, int len)
 	if ((str = ft_strstr(line, "name")))
 	{
 		tab = ft_strsplit(line, '"');
-		if (tab[1] == NULL)
-		{
-			// champ->header->prog_name = ; // set an array to null?
+		if (tab[1] == NULL) // considering it is not an error
 			return ;
-		}
 		if (ft_strlen(tab[1]) <= PROG_NAME_LENGTH)
 			ft_memcpy(champ->header->prog_name, tab[1], ft_strlen(tab[1]));
 		else
 		{
+			ft_memdel((void**)tab);
 			invalid_header(champ, 1);
 		}
 		ft_memdel((void**)tab);
@@ -37,6 +35,7 @@ void get_name_comment(char *line, t_asm *champ, int len)
 	else if ((str = ft_strstr(line, "comment")))
 	{
 		check_comment(len, str, line, champ);
+		ft_memdel((void**)tab);
 	}
 	else
 	{
@@ -80,7 +79,6 @@ void check_comment(int len, char *str, char *line, t_asm *champ)
 	{
 		invalid_header(champ, 2);
 	}
-	ft_memdel((void**)tab);
 }
 
 char *str_to_char(char *str, char c)

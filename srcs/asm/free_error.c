@@ -6,7 +6,7 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 12:30:41 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/11 17:18:44 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/18 16:29:40 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,25 +42,36 @@ void invalid_header(t_asm *champ, int error)
 	// 	 	row, len2 + (i + 1), str + i);
 	// 		//free tab and line in champ
 	// }
+	ft_strdel(&champ->file_name);
+	free(champ->header);
+	free(champ->head);
+	free(champ->first);
+	free(champ);
 	exit (-1);
 }
 
-void file_error(t_asm *champ, char *file_name, int error)
+void file_error(t_asm *champ, char *file_name, int error) // change to error
 {
 	if (error == 1)
 		ft_printf("Can't read source file %s\n", file_name);
 	if (error == 2)
 	{
-		ft_printf("Couldn't open file %s\n", file_name);
 		ft_strdel(&champ->file_name);
+		ft_printf("Couldn't open file %s\n", file_name);
 	}
+	if (error == 3)
+		ft_strdel(&champ->file_name);
+	free(champ->head);
+	free(champ->first);
 	free(champ);
 	exit(-1);
 }
 
 void malloc_error(t_asm *champ, char *file)
 {
-	ft_printf("Malloc error in %s\n", file);
+	ft_printf("Malloc error with %s\n", file);
+	free(champ->head);
+	free(champ->first);
 	free(champ);
 	exit (-1);
 }

@@ -6,7 +6,7 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 16:04:14 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/12 16:04:33 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/18 15:19:06 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	init_token_struct(t_asm *champ)
 	champ->first->line = NULL;
 	champ->first->column = 0;
 	while (++i < 3)
+	{
 		champ->first->param[i] = NULL;
 		champ->first->param_type[i] = 0;
+	}
 }

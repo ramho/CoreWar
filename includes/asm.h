@@ -82,10 +82,11 @@ void	parse_token(char *line, t_asm *champ);
 /*
 ** free_error.c
 */
-void	invalid_header(t_asm *champ, int error);
+// void	invalid_header(t_asm *champ, int error);
 void	file_error(t_asm *champ, char *file_name, int error);
 void	malloc_error(t_asm *champ, char *file);
 void	free_chained_label(t_asm *champ);
+void	invalid_header(t_asm *champ, int error, char *str);
 
 /*
 ** parse_header.c
@@ -93,6 +94,7 @@ void	free_chained_label(t_asm *champ);
 void	get_name_comment(char *line, t_asm *champ, int len);
 void	check_comment(int len, char *str, char *line, t_asm *champ);
 char	*str_to_char(char *str, char c);
+void	save_comment(char *line, t_asm *champ);
 
 /*
 ** parse_op.c

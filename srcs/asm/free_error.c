@@ -6,7 +6,7 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 12:30:41 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/18 16:29:40 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/29 16:30:30 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 // 	ft_printf("Syntax error at tokem [TOKEN][:]");
 // }
 
-void invalid_header(t_asm *champ, int error)
+void invalid_header(t_asm *champ, int error, char *str)
 {
 	if (error == 1)
 	{
@@ -35,6 +35,10 @@ void invalid_header(t_asm *champ, int error)
 	{
 		ft_printf("Champion comment too long (Max length 2048)\n");
 		//free tab and line in champ
+	}
+	if (error == 3)
+	{
+		ft_strdel(&str);
 	}
 	// if (error = 3)
 	// {

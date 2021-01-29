@@ -6,7 +6,7 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 12:30:57 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/18 16:18:40 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/01/29 17:07:21 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		valid_file(t_asm *champ, char *file_name)
 
 void	get_file(char *file, t_asm *champ, int fd)
 {
-	int		start;
+	int		end;
 	char	*line;
 	char	*buf;
 
@@ -45,8 +45,8 @@ void	get_file(char *file, t_asm *champ, int fd)
 		file_error(champ, file, 3);
 	while ((get_next_line(fd, &line) > 0))
 	{
-		start = ft_pos_i(line, '#');
-		line = ft_strsub(line, 0, start); // malloc free to check
+		end = ft_pos_i(line, '#');
+		line = ft_strsub(line, 0, end); // malloc free to check
 		if ((buf = ft_strchr(line, '.')))
 			get_name_comment(buf, champ, ft_strlen(line));
 		else

@@ -6,7 +6,7 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 16:10:21 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/02/08 16:39:44 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/02/08 17:16:24 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void parse_param(int op, char **tab, t_asm *champ)
 {
-	printf("in PARSE_PARAM op [%s]\n", g_op[op].name);
+	// printf("in PARSE_PARAM op [%s]\n", g_op[op].name);
 	int i;
 	int param;
 	char *type;
@@ -24,7 +24,7 @@ void parse_param(int op, char **tab, t_asm *champ)
 	while (++i < g_op[op].args_num)
 	{
 		param = check_param(ft_strtrim(tab[i]), champ, i);
-		printf(" param [%s]\n", tab[i]);
+		// printf(" param [%s]\n", tab[i]);
 		if (!(g_op[op].args_types[i] & param) && param > 0)
 		{
 			ft_memdel((void**)tab);
@@ -35,7 +35,7 @@ void parse_param(int op, char **tab, t_asm *champ)
 
 int check_param(char *param, t_asm *champ, int param_i)// better to use index or move pointer directly ???
 {
-	printf("    in CHECK_PARAM [%s] c[%c]\n", param, param[0]);
+	// printf("    in CHECK_PARAM [%s] c[%c]\n", param, param[0]);
 	int i;
 	int check;
 	int ret = 0;

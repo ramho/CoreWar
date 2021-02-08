@@ -6,7 +6,7 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 18:48:52 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/02/08 16:59:19 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/02/08 17:31:12 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 
 void add_op_link(t_token *new, t_asm *champ)
 {
+
+	printf("\t NEW ADDR IN ADD [%p]\n", new);
 	//printf("in ADD_OP_LINK\n");
 	// //printf("pos [%d]\top_code[%d]\tlabel[%s]\tline[%s]\n", new->pos, new->op_code, new->label, new->line);
 	t_token *index;
@@ -29,14 +31,19 @@ void add_op_link(t_token *new, t_asm *champ)
 	}
 	else
 	{
+		printf("heren\n");
 		index = champ->first;
+		printf("ici\n");
 		while (index->next != NULL)
 		{
+			printf("index ADDR [%p]\n", index);
 			// //printf("\tINDEX [%s]\n", index->line);
 			index = index->next;
 		}
+		printf("lili\n");
 		index->next = new;
 	}
+	printf("mip 2\n");
 	// FOR DEBUGING ONLY
 	// index = champ->first;
 	// while (index)

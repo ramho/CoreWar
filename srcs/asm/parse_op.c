@@ -6,7 +6,7 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 14:19:25 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/02/08 17:06:37 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/02/08 17:34:12 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void check_op(char *name, char *line, int size_op, t_asm *champ, int column)
  {
-	 printf("in CHECK_OP line [%s]\n", line);
+	 // printf("in CHECK_OP line [%s]\n", line);
 	 // printf("   name [%s] line [%s] column [%d]\n",name, line, column);
 	 int j;
 
@@ -27,13 +27,15 @@ void check_op(char *name, char *line, int size_op, t_asm *champ, int column)
 			if (parse_op(name,line, size_op, j, champ, column))
 			{
 				// add to chained list
+
 				add_op_link(champ->new_token, champ);
 				// calculate position
 				calc_new_pos(champ->new_token, champ);
 				// calculate encoded byte
 				printf(" 3 - ADD of NEW TOKEN [%p]\n",champ->new_token  );
-				free(champ->new_token);
-				printf("FREE\n");
+				// ft_memdel((void **)&champ->new_token);
+				printf(" 4 - ADD of NEW TOKEN [%p]\n\n",champ->new_token  );
+				// printf("FREE\n");
 				return ;
 			}
 		}
@@ -53,7 +55,6 @@ void check_op(char *name, char *line, int size_op, t_asm *champ, int column)
  	j = 0;
  	while (tab[j] != NULL)
 	{
-		printf("op is [%s]\n", tab[j]);
  		j++;
 	}
  	if (j != g_op[op].args_num)
@@ -72,6 +73,7 @@ void check_op(char *name, char *line, int size_op, t_asm *champ, int column)
 	}
 	printf(" 2 - ADD of NEW TOKEN [%p]\n",champ->new_token  );
 	champ->new_token->op_code = op;
+
 	if( champ->head->flag == 1)
 	{
 		champ->new_token->label = champ->head->name; // need to add a flag so only label if there is one
@@ -83,7 +85,6 @@ void check_op(char *name, char *line, int size_op, t_asm *champ, int column)
 	// ft_strdel(&line); // sefgault
 	ft_strdel(&ret);
  	parse_param(op, tab, champ);
-
  	return (1);
  }
 

@@ -19,7 +19,7 @@ struct	s_asm
 	int i;
 	int row;
 	int pos; //  number of bytes
-	char *line;
+	char *line; // ? for what
 	char *file_name;
 
 	char *program;
@@ -87,6 +87,8 @@ void	file_error(t_asm *champ, char *file_name, int error);
 void	malloc_error(t_asm *champ, char *file);
 void	free_chained_label(t_asm *champ);
 void	invalid_header(t_asm *champ, int error, char *str);
+void	invalid_op(t_asm *champ, int error, char *str);
+void	invalid_param(t_asm *champ, int param, int i, int op);
 
 /*
 ** parse_header.c
@@ -107,6 +109,7 @@ void	calc_new_pos(t_token *token, t_asm *champ);
 ** parse_param.c
 */
 void	parse_param(int op, char **tab, t_asm *champ);
+// int	parse_param(int op, char **tab, t_asm *champ);
 int		check_param(char *param, t_asm *champ, int param_i);
 
 /*

@@ -6,7 +6,7 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 18:04:17 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/29 17:20:26 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/02/08 14:43:58 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,16 @@ void get_name_comment(char *line, t_asm *champ, int len)
 	{
 		ft_printf("Lexical error at ");
 		ft_printf("[%d:%d]\n", champ->row, len  - (ft_strlen(line) - 1));
+		ft_strdel(&line);
 		invalid_header(champ, 0, NULL);
 	}
 	else if ((str = ft_strstr(line, "name")))
 	{
-		tab = ft_strsplit(line, '"');
+		if (!(tab = ft_strsplit(line, '"')))
+		{
+			ft_strdel(&line);
+			invalid_header(champ, 0, NULL);
+		}
 		if (tab[1] == NULL) // considering it is not an error
 			return ;
 		if (ft_strlen(tab[1]) <= PROG_NAME_LENGTH)
@@ -34,12 +39,18 @@ void get_name_comment(char *line, t_asm *champ, int len)
 		else
 		{
 			ft_memdel((void**)tab);
+			ft_strdel(&line);
 			invalid_header(champ, 1, NULL);
 		}
 		ft_memdel((void**)tab);
 	}
 	else if ((str = ft_strstr(line, "comment")))
 		check_comment(len, str, line, champ);
+	else
+	{
+		ft_printf("Lexical error at [%d:%d]\n", champ->row, 1);
+		invalid_header(champ, 3, line);
+	}
 }
 
 void check_comment(int len, char *str, char *line, t_asm *champ)
@@ -53,9 +64,14 @@ void check_comment(int len, char *str, char *line, t_asm *champ)
 	{
 		if (str[i] != '\t' && str[i] != ' ')
 		{
-			str = str_to_char(str + i, ' ');
+			if (!(str = str_to_char(str + i, ' ')))
+			{
+				ft_strdel(&line);
+				invalid_header(champ, 0, NULL);
+			}
+			ft_strdel(&line);
 			ft_printf("Syntax error at token [TOKEN]");
-			ft_printf(" [%03d:%03d] INSTRUCTION \"%s\"\n", champ->row, len2 + (i + 1), str)
+			ft_printf(" [%03d:%03d] INSTRUCTION \"%s\"\n", champ->row, len2 + (i + 1), str);
 			invalid_header(champ, 3, str);
 		}
 		i++;
@@ -89,6 +105,7 @@ void save_comment(char *line, t_asm *champ)
 	else
 	{
 		ft_memdel((void**)tab);
+		ft_strdel(&line);
 		invalid_header(champ, 2, NULL);
 	}
 }

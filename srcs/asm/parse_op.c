@@ -6,7 +6,7 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 14:19:25 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/17 14:15:59 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/02/08 17:06:37 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void check_op(char *name, char *line, int size_op, t_asm *champ, int column)
  {
-	 // printf("in CHECK_OP\n");
+	 printf("in CHECK_OP line [%s]\n", line);
 	 // printf("   name [%s] line [%s] column [%d]\n",name, line, column);
 	 int j;
 
@@ -27,11 +27,13 @@ void check_op(char *name, char *line, int size_op, t_asm *champ, int column)
 			if (parse_op(name,line, size_op, j, champ, column))
 			{
 				// add to chained list
-
 				add_op_link(champ->new_token, champ);
 				// calculate position
 				calc_new_pos(champ->new_token, champ);
 				// calculate encoded byte
+				printf(" 3 - ADD of NEW TOKEN [%p]\n",champ->new_token  );
+				free(champ->new_token);
+				printf("FREE\n");
 				return ;
 			}
 		}
@@ -50,17 +52,25 @@ void check_op(char *name, char *line, int size_op, t_asm *champ, int column)
  	tab = ft_strsplit(line + i, SEPARATOR_CHAR);
  	j = 0;
  	while (tab[j] != NULL)
+	{
+		printf("op is [%s]\n", tab[j]);
  		j++;
+	}
  	if (j != g_op[op].args_num)
  	{
- 		ft_printf("Invalid parameter count for instruction %s\n", ret);
- 		exit(0);
+		ft_strdel(&line);
+		ft_memdel((void**)tab);
+		invalid_op(champ, 2, ret);
  	}
+	printf(" 1 - ADD of NEW TOKEN [%p]\n",champ->new_token  );
+
 	if (!(champ->new_token = ft_memalloc(sizeof(t_token))))
 	{
-		//printf("malloc_error in parse op\n");
-		exit(0);
+		ft_strdel(&line);
+		ft_memdel((void**)tab);
+		invalid_op(champ, 0, ret);
 	}
+	printf(" 2 - ADD of NEW TOKEN [%p]\n",champ->new_token  );
 	champ->new_token->op_code = op;
 	if( champ->head->flag == 1)
 	{
@@ -70,6 +80,8 @@ void check_op(char *name, char *line, int size_op, t_asm *champ, int column)
 	champ->new_token->pos =	champ->pos;
 	champ->new_token->line = ft_strdup(line);
 	champ->new_token->column = column;
+	// ft_strdel(&line); // sefgault
+	ft_strdel(&ret);
  	parse_param(op, tab, champ);
 
  	return (1);
@@ -80,7 +92,7 @@ void check_op(char *name, char *line, int size_op, t_asm *champ, int column)
 */
 void	calc_new_pos(t_token *token, t_asm *champ)
 {
-	printf("in CALC_NEW_POS name [%s]\n", g_op[token->op_code].name);
+	// printf("in CALC_NEW_POS name [%s]\n", g_op[token->op_code].name);
 	int byte;
 	int i;
 

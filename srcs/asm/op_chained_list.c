@@ -6,7 +6,7 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 18:48:52 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/14 16:48:53 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/02/08 16:59:19 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void add_op_link(t_token *new, t_asm *champ)
 		}
 		index->next = new;
 	}
-
 	// FOR DEBUGING ONLY
 	// index = champ->first;
 	// while (index)

@@ -6,7 +6,7 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 13:25:03 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/14 16:50:30 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/02/08 16:26:25 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,22 @@
 
 int check_dir(char *param, int param_i, t_asm *champ)
 {
-	//printf("in CHECK_DIR param [%s]\n", param);
+	// printf("            in CHECK_DIR param [%s] i[%c] LINE [%s] \n", param, param[0], champ->line);
 	int i;
 
 	i = 0;
 	if (param[i] == LABEL_CHAR)
 	{
 		i++;
+		if (ft_isspace(param[i]))
+		{
+			ft_printf("Lexical error at [%d:%d]\n", champ->row, ft_strstri(champ->line, param));
+			exit(-1);
+		}
 		while (ft_strchr(LABEL_CHARS, param[i]) && param[i])
 			i++;
 			champ->new_token->param[param_i] = param + 1;
 			champ->new_token->param_type[param_i] = DIR_CODE;
-			// //printf("\tDIR param [%d] [%s][%d]\n", param_i, champ->new_token->param[param_i],champ->new_token->param_type[param_i]);
 			return (1);
 	}
 	else
@@ -58,7 +62,6 @@ int check_ind(char *param, int param_i, t_asm *champ)
 		{
 			champ->new_token->param[param_i] = param + 1;
 			champ->new_token->param_type[param_i] = IND_CODE;
-			//printf("\tIND param [%d] [%s][%d]\n", param_i, champ->new_token->param[param_i],champ->new_token->param_type[param_i]);
 			return (1);
 		}
 	}
@@ -69,7 +72,6 @@ int check_ind(char *param, int param_i, t_asm *champ)
 		{
 			champ->new_token->param[param_i] = param;
 			champ->new_token->param_type[param_i] = IND_CODE;
-			//printf("\tIND param [%d] [%s][%d]\n", param_i, champ->new_token->param[param_i],champ->new_token->param_type[param_i]);
 			return (1);
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 16:10:21 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/17 14:11:32 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/02/08 16:39:44 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void parse_param(int op, char **tab, t_asm *champ)
 {
-	//printf("in PARSE_PARAM op [%s]\n", g_op[op].name);
+	printf("in PARSE_PARAM op [%s]\n", g_op[op].name);
 	int i;
 	int param;
 	char *type;
@@ -23,21 +23,13 @@ void parse_param(int op, char **tab, t_asm *champ)
 	type = NULL;
 	while (++i < g_op[op].args_num)
 	{
-		// //printf("i [%d] < [%d]\n", i ,g_op[op].args_num );
 		param = check_param(ft_strtrim(tab[i]), champ, i);
-		// //printf(" param [%d]\n", param);
+		printf(" param [%s]\n", tab[i]);
 		if (!(g_op[op].args_types[i] & param) && param > 0)
 		{
-			if (param == 1)
-				type = "register";
-			if (param == 2)
-				type = "direct";
-			if (param == 4)
-				type = "indirect";
-			ft_printf("Invalid parameter %d type %s for instruction %s\n", i, type, g_op[op].name); // find way to indicate type
-			exit(0);
+			ft_memdel((void**)tab);
+			invalid_param(champ, param, i, op);
 		}
-		// //printf("PARAM [%d] OK\n", param);
 	}
 }
 
@@ -51,13 +43,13 @@ int check_param(char *param, t_asm *champ, int param_i)// better to use index or
 	i = 0;
 	if (param[i] == 'r') // reg
 	{
-		printf("in REG \n");
+		// printf("in REG \n");
 		if ((ret = check_reg(param + 1, param_i, champ)))
 			return(T_REG);
 	}
 	else if (param[i] == DIRECT_CHAR) // dir
 	{
-		printf("in DIR \n");
+		// printf("in DIR \n");
 		// //printf(" in DIRECt the char is [%c]\n", param[i]);
 		i++;
 		if ((check_dir(param + i, param_i, champ)))
@@ -65,7 +57,7 @@ int check_param(char *param, t_asm *champ, int param_i)// better to use index or
 	}
 	else if (ft_isdigit(param[i]) || param[i] == LABEL_CHAR || param[i] == '-') // ind
 	{
-		printf("in IND \n");
+		// printf("in IND \n");
 		if ((check_ind(param , param_i, champ)))
 			return (T_IND);
 	}

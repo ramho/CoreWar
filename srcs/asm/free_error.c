@@ -6,24 +6,50 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 12:30:41 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/29 16:30:30 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/02/08 16:34:39 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/asm.h"
 
-// void invalid_param()
-// {
-// 	ft_printf("Invalid parameter %d type %s for instruction %s\n", param_nb, type, op);
-// 	//free everything from before
-// 	exit(-1);
-// }
+void invalid_param(t_asm *champ, int param, int i, int op)
+{
+	char *type;
+
+	if (param == 1)
+		type = "register";
+	if (param == 2)
+		type = "direct";
+	if (param == 4)
+		type = "indirect";
+	ft_printf("Invalid parameter %d type %s for instruction %s\n", i, type, g_op[op].name);
+	//free token
+	//free label chain
+	//free op chain
+	invalid_op(champ, 0, NULL);
+}
 //
 // void syntax_error()
 // {
 // 	ft_printf("Syntax error at tokem [TOKEN][:]");
 // }
 
+void invalid_op(t_asm *champ, int error, char *str)
+{
+	if (error == 1)
+		ft_printf("Lexical error at [%d:%d]\n", champ->row, champ->i + 1);
+	if (error == 2)
+	{
+		ft_printf("Invalid parameter count for instruction %s\n", str);
+		ft_strdel(&str);
+	}
+	ft_strdel(&champ->file_name);
+	free(champ->header);
+	free(champ->head);
+	free(champ->first);
+	free(champ);
+	exit (-1);
+}
 void invalid_header(t_asm *champ, int error, char *str)
 {
 	if (error == 1)

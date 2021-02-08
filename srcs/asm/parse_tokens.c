@@ -6,7 +6,7 @@
 /*   By: rhoorntj <rhoorntj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 12:30:49 by rhoorntj          #+#    #+#             */
-/*   Updated: 2021/01/18 14:12:31 by rhoorntj         ###   ########.fr       */
+/*   Updated: 2021/02/08 14:54:59 by rhoorntj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,37 +17,6 @@
 // Syntax error at token [TOKEN][002:002] INSTRUCTION "ld" lde.s
 
 // Invalid parameter [2(0-2)] type [register] for instruction [ld]
-
-// void get_file(char *file, t_asm *champ)
-// {
-// 	int fd;
-// 	int start;
-// 	char *line;
-// 	char *buf;
-//
-// 	champ->row = 1;
-// 	if ((fd = open(file, O_RDONLY)) <= 0)
-// 		file_error(champ, file, 2);
-// 	if (!(champ->header = ft_memalloc(sizeof(header_t))))
-// 	{
-// 		free(champ);
-// 		exit(-1);
-// 	}
-// 	while ((get_next_line(fd, &line) > 0))
-// 	{
-// 		//check if comment before title like in car.s
-// 		start = ft_pos_i(line, '#');
-// 		line = ft_strsub(line, 0, start); // malloc free to check
-// 		if ((buf = ft_strchr(line, '.')))
-// 			get_name_comment(buf, champ, ft_strlen(line));
-// 		else
-// 		{
-// 			parse_token(line, champ);
-// 		}
-// 		free(line);
-// 		champ->row++;
-// 	}
-// }
 
 void parse_token(char *line, t_asm *champ)
 {
@@ -64,11 +33,17 @@ void parse_token(char *line, t_asm *champ)
 		flag = champ->i;
 		while (ft_strchr(LABEL_CHARS, line[champ->i]))
 			champ->i++;
-		ret = ft_strsub(line, flag, champ->i - flag);
+		if (!(ret = ft_strsub(line, flag, champ->i - flag)))
+		{
+			ft_strdel(&line);
+			invalid_op(champ, 0, NULL);
+		}
+		// ft_printf("1 - line[champ->i] = [%c]\n", line[champ->i]);
 		if (ft_isspace(line[champ->i]))
 		{
 			while (ft_isspace(line[champ->i]))
 				champ->i++;
+			// ft_printf("2 - line[champ->i] = [%c] +1 = [%c]\n", line[champ->i], line[champ->i + 1] );
 			if (line[champ->i] == ':' && (!line[champ->i + 1] || ft_isspace(line[champ->i + 1])))
 			{
 				ft_printf("Lexical error at [%d:%d]\n", champ->row, champ->i + 1);

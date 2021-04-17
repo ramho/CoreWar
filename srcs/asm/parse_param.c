@@ -37,7 +37,7 @@ int check_param(char *param, t_asm *champ, int param_i)// better to use index or
 {
 	// printf("    in CHECK_PARAM [%s] c[%c]\n", param, param[0]);
 	int i;
-	int check;
+	// int check;
 	int ret = 0;
 
 	i = 0;

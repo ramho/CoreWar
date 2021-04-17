@@ -10,6 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+// Check the magic number
+// 
+//
+
+#include "../../includes/op.h"
 #include "../../includes/corewar.h"
 
 void parse_input(int ac, char **av)

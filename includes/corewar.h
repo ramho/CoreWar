@@ -13,7 +13,13 @@
 #ifndef COREWAR_H
 # define COREWAR_H
 
-#   include <stdio.h>
+// # include "asm.h"
+# include "../libft/libft.h"
+# include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
+#include <sys/stat.h>
+# include <stdio.h>  //remove
 
 
 int main(int ac, char **av);
